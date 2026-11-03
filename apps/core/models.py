@@ -19,10 +19,10 @@ class SiteContent(ClusterableModel, BaseGenericSetting):
     intro_text = models.TextField(default="Fifteen years of supplying homes, businesses and city projects, now with a range of our own.")
 
     feature_eyebrow = models.CharField(max_length=40, default="Just arrived")
-    feature_title = models.CharField(max_length=80, default="Rayzen laser blades")
+    feature_title = models.CharField(max_length=80, default="New in")
     feature_text = models.TextField(blank=True, default="")
     feature_products = models.ManyToManyField("catalogue.Product", blank=True, related_name="+",
-                                              help_text="Products whose options appear as cards under the feature.")
+                                              help_text="Leave empty to show every product marked NEW. Pick products to show their sizes as cards instead.")
     feature_image = models.ForeignKey("wagtailimages.Image", null=True, blank=True, on_delete=models.SET_NULL, related_name="+")
     feature_link = models.ForeignKey("catalogue.Product", null=True, blank=True, on_delete=models.SET_NULL, related_name="+")
 
@@ -58,7 +58,9 @@ class HeroSlide(Orderable):
     link_url = models.CharField(max_length=200, help_text="e.g. /products/downlights/ or /#commercial")
     image = models.ForeignKey("wagtailimages.Image", null=True, blank=True, on_delete=models.SET_NULL, related_name="+",
                               help_text="Wide photo, about 2400×1100. Keep the left third calm for the headline.")
+    mobile_image = models.ForeignKey("wagtailimages.Image", null=True, blank=True, on_delete=models.SET_NULL, related_name="+",
+                                     help_text="Tall photo for phones, about 1024×1536. Keep the bottom third calm for the headline.")
     fallback = models.CharField(max_length=12, default="warm", choices=[("warm", "Warm room"), ("cool", "Commercial"), ("studio", "Studio")],
                                 help_text="Background used until a photo is added.")
 
-    panels = [FieldRowPanel([FieldPanel("title"), FieldPanel("link_text"), FieldPanel("link_url")]), FieldRowPanel([FieldPanel("image"), FieldPanel("fallback")])]
+    panels = [FieldRowPanel([FieldPanel("title"), FieldPanel("link_text"), FieldPanel("link_url")]), FieldRowPanel([FieldPanel("image"), FieldPanel("mobile_image"), FieldPanel("fallback")])]

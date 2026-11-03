@@ -1,4 +1,5 @@
 {% extends "base.html" %}{% load wagtailimages_tags humanize %}
+{% block body_class %}home{% endblock %}
 {% block og_title %}Radiant Lighting · Architectural LED lighting, Multan{% endblock %}
 {% block head %}<script type="application/ld+json">{"@context":"https://schema.org","@type":"Store","name":"Radiant Lighting","telephone":"+{{ site.whatsapp }}","email":"{{ site.email }}","address":{"@type":"PostalAddress","streetAddress":"{{ site.address|linebreaksbr|striptags|escapejs }}","addressLocality":"Multan","addressCountry":"PK"},"url":"{{ request.build_absolute_uri }}"}</script>{% endblock %}
 {% block content %}
@@ -6,7 +7,7 @@
   {% for s in slides %}
   <div class="slide{% if forloop.first %} on{% endif %}{% if s.fallback == 'studio' %} slide-3{% endif %}" aria-hidden="{% if forloop.first %}false{% else %}true{% endif %}">
     <div class="slot{% if s.image %} has-photo{% endif %}">
-      {% if s.image %}{% image s.image fill-2400x1100 format-webp class="photo" alt="" %}{% if forloop.first %}{% endif %}
+      {% if s.image %}<picture>{% if s.mobile_image %}{% image s.mobile_image fill-900x1350 format-webp as mob %}<source media="(max-width: 700px)" srcset="{{ mob.url }}">{% endif %}{% image s.image fill-2400x1100 format-webp class="photo" alt="" %}</picture>
       {% elif s.fallback == "studio" %}<div class="fb fb-hero3">{% if site.feature_link.cutout %}{% image site.feature_link.cutout max-900x600 format-webp alt="" %}{% endif %}</div>
       {% elif s.fallback == "cool" %}<div class="fb fb-hero2"></div>{% else %}<div class="fb fb-hero1"></div>{% endif %}
       <div class="ov"></div>
@@ -28,16 +29,17 @@
   </div>
 </section>
 
-{% if site.feature_title %}
+{% if feature_cards %}
 <section class="feature" aria-labelledby="feat-h">
   <div class="feature-top">
-    <div class="feature-panel"><div><span class="eyebrow">{{ site.feature_eyebrow }}</span><h2 id="feat-h">{{ site.feature_title }}</h2>{% if site.feature_text %}<p>{{ site.feature_text }}</p>{% endif %}{% if site.feature_link %}<a class="tlink" href="{{ site.feature_link.get_absolute_url }}">Discover {{ site.feature_link.name }}</a>{% endif %}</div></div>
-    <div class="feature-img slot{% if site.feature_image %} has-photo{% endif %}">{% if site.feature_image %}{% image site.feature_image fill-2000x1400 format-webp class="photo" alt="" loading="lazy" %}{% else %}<div class="fb">{% for c in feature_cards|slice:":1" %}{% image c.image max-900x600 format-webp alt="" style="width:46%;left:10%;top:22%;transform:rotate(-14deg)" %}{% endfor %}{% with last=feature_cards|last %}{% if last %}{% image last.image max-500x500 format-webp alt="" style="width:20%;right:14%;top:30%;transform:rotate(8deg)" %}{% endif %}{% endwith %}{% for c in feature_cards|slice:":1" %}{% image c.image max-700x500 format-webp alt="" style="width:30%;left:36%;top:52%;transform:rotate(-14deg)" %}{% endfor %}</div>{% endif %}</div>
+    <div class="feature-panel"><div><span class="eyebrow">{{ site.feature_eyebrow }}</span><h2 id="feat-h">{{ site.feature_title }}</h2>{% if site.feature_text %}<p>{{ site.feature_text }}</p>{% endif %}
+      {% if site.feature_link %}<a class="tlink" href="{{ site.feature_link.get_absolute_url }}">Discover {{ site.feature_link.name }}</a>{% else %}<a class="tlink" href="{% url 'catalogue:new' %}">Shop new in</a>{% endif %}</div></div>
+    <div class="feature-img slot{% if site.feature_image %} has-photo{% endif %}">{% if site.feature_image %}{% image site.feature_image fill-2000x1400 format-webp class="photo" alt="" loading="lazy" %}{% else %}<div class="fb collage">{% for c in feature_cards|slice:":3" %}{% if c.image %}{% image c.image max-700x700 format-webp alt="" %}{% endif %}{% endfor %}</div>{% endif %}</div>
   </div>
-  {% if feature_cards %}<div class="feature-row"><div class="rail-wrap">{% include "partials/arrows.html" with rail="feat" %}<div class="rail" id="feat">{% for c in feature_cards %}
-    <a class="card" href="{{ c.product.get_absolute_url }}"><div class="ph">{% if c.product.is_new %}<span class="new">NEW</span>{% endif %}{% if c.image %}{% image c.image max-600x600 format-webp alt="" loading="lazy" %}{% endif %}</div>
-      <span class="nm">{{ c.product.name }} {{ c.variant.label }}</span>{% if c.product.finishes.all %}<span class="sw">{% for f in c.product.finishes.all %}<i style="background:{{ f.swatch }}" title="{{ f.name }}"></i>{% endfor %}</span>{% endif %}<span class="pr">{% if c.variant.price %}PKR {{ c.variant.price|intcomma }}{% else %}Price on request{% endif %}</span></a>
-  {% endfor %}</div></div></div>{% endif %}
+  <div class="feature-row"><div class="rail-wrap">{% include "partials/arrows.html" with rail="feat" %}<div class="rail" id="feat">{% for c in feature_cards %}
+    <a class="card" href="{{ c.url }}"><div class="ph">{% if c.is_new %}<span class="new">NEW</span>{% endif %}{% if c.image %}{% image c.image max-600x600 format-webp alt="" loading="lazy" %}{% endif %}</div>
+      <span class="nm">{{ c.name }}</span>{% if c.finishes %}<span class="sw">{% for f in c.finishes %}<i style="background:{{ f.swatch }}" title="{{ f.name }}"></i>{% endfor %}</span>{% endif %}<span class="pr">{{ c.price }}</span></a>
+  {% endfor %}</div></div></div>
 </section>
 {% endif %}
 

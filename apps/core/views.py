@@ -20,13 +20,20 @@ def home(request):
         c.range_count = count.get(c.pk, 0)
 
     feature_cards = []
-    for fp in site.feature_products.all():
-        seen = set()
-        for v in fp.variants.select_related("image", "finish"):
-            if v.label in seen:
-                continue
-            seen.add(v.label)
-            feature_cards.append({"product": fp, "variant": v, "image": v.image or fp.cutout})
+    chosen = list(site.feature_products.all())
+    if chosen:
+        for fp in chosen:
+            seen = set()
+            for v in fp.variants.select_related("image", "finish"):
+                if v.label in seen:
+                    continue
+                seen.add(v.label)
+                feature_cards.append({"url": fp.get_absolute_url(), "name": f"{fp.name} {v.label}", "image": v.image or fp.cutout,
+                                      "price": f"PKR {v.price:,}" if v.price else "Price on request", "is_new": fp.is_new, "finishes": fp.finishes.all()})
+    else:
+        for fp in [p for p in products if p.is_new]:
+            feature_cards.append({"url": fp.get_absolute_url(), "name": fp.name, "image": fp.cutout, "price": fp.price_label,
+                                  "is_new": True, "finishes": fp.finishes.all()})
 
     return render(request, "core/home.html", {
         "site": site, "slides": site.slides.select_related("image"), "spaces": Application.objects.select_related("cutout", "photo"),

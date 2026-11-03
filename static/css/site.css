@@ -354,3 +354,53 @@ footer{margin-top:104px;background:var(--deep);color:#C6D1C9}
 #choices{display:flex;flex-direction:column;gap:22px}
 #choices:empty{display:none}
 @media (max-width:900px){.prod:has(.thumbs:empty){grid-template-columns:1fr}}
+
+/* ---------- Phone layout (Astro-style) ---------- */
+.feature-img .collage img{position:absolute;mix-blend-mode:multiply;object-fit:contain}
+.feature-img .collage img:nth-child(1){width:38%;height:56%;left:8%;top:18%}
+.feature-img .collage img:nth-child(2){width:30%;height:44%;left:44%;top:40%}
+.feature-img .collage img:nth-child(3){width:26%;height:40%;right:6%;top:12%}
+@media (max-width:900px){
+  :root{--gut:20px}
+  .util{display:none}
+  body.home .hdr{position:fixed;left:0;right:0;top:0;background:transparent;border-bottom-color:transparent;color:#fff;transition:background .25s,color .25s,border-color .25s}
+  body.home .hdr .logo span{color:rgba(255,255,255,.8)}
+  body.home .hdr.solid{background:var(--white);color:var(--ink);border-bottom-color:var(--line)}
+  body.home .hdr.solid .logo span{color:var(--muted)}
+  .hdr>.wrap{height:64px}
+  .logo b{font-size:21px}
+  .hero{height:min(80svh,720px)}
+  .hero .txt{align-items:flex-end;padding-bottom:84px}
+  .hero h2{font-size:clamp(40px,11vw,52px);line-height:1.02}
+  .hero .tlink{font-size:18px;margin-top:16px}
+  .slide .ov{background:linear-gradient(180deg,rgba(0,0,0,.42) 0%,rgba(0,0,0,0) 22%,rgba(0,0,0,0) 45%,rgba(0,0,0,.62) 100%)}
+  .dots{bottom:16px}
+  .sec{padding-top:56px}
+  .intro{gap:36px}
+  .intro .rail-wrap{order:-1}
+  .intro h1{font-size:30px!important}
+  .intro p{font-size:17px;max-width:none}
+  .rail>*,.feature-row .rail>*,.simrail .rail>*{flex:0 0 44%!important}
+  .rail{gap:14px;scroll-padding-inline:var(--gut)}
+  .space>span{font-size:17px}
+  .rail .card .nm{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:16px}
+  .rail .card .sp{display:none}
+  .feature{margin-top:56px}
+  .feature-img{order:-1;height:auto;aspect-ratio:4/3}
+  .feature-panel{padding:36px var(--gut) 132px}
+  .feature-panel h2{font-size:32px}
+  .feature-panel p{font-size:17px}
+  .feature-row{margin-top:-104px}
+  .bento{display:flex!important;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;gap:14px;margin:0 calc(var(--gut) * -1);padding:0 var(--gut) 4px;scroll-padding-inline:var(--gut)}
+  .bento::-webkit-scrollbar{display:none}
+  .bento a,.bento a.tall{flex:0 0 44%;height:auto;aspect-ratio:3/4;grid-column:auto;grid-row:auto;scroll-snap-align:start}
+  .bento .fb img{width:66%;height:52%}
+  .bento .lbl{left:14px;right:14px;top:14px;font-size:16px;line-height:1.25}
+  .bento small{left:14px;top:auto;bottom:12px}
+  .head h2{font-size:30px}
+  .band .wrap{padding-top:48px;padding-bottom:48px}
+  .band h2,.about h2,.showroom h2{font-size:30px}
+  .about p,.band p{font-size:17px}
+  .brands-row{gap:18px 28px;justify-content:flex-start}
+  .brands-row b{font-size:18px}
+}

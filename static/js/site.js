@@ -43,6 +43,14 @@
     if (wasMega) megaBtn.focus();
   });
 
+  /* Home on phones: header sits over the hero and turns solid once you scroll */
+  if (document.body.classList.contains("home") && hdr) {
+    const solid = () => hdr.classList.toggle("solid", scrollY > 24 || (search && !search.hidden));
+    addEventListener("scroll", solid, { passive: true });
+    searchBtn && searchBtn.addEventListener("click", () => setTimeout(solid));
+    solid();
+  }
+
   /* Rails and hero carousel */
   document.addEventListener("click", (e) => {
     const b = e.target.closest("[data-rail]"); if (!b) return;

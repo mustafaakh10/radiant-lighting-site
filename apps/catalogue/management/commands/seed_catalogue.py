@@ -28,8 +28,7 @@ FINISHES = [("White", "#F2F0EB"), ("Black", "#1E1E1D"), ("Silver", "#C8CBCE")]
 ABOUT = ("Radiant Lighting is led by Mohammad Akhtar, who worked with Philips, Signify and GE Lighting on projects from the GCC to "
          "Europe before bringing that experience home to Multan. Today we distribute Philips, Osram and NVC, supply commercial, "
          "industrial and infrastructure projects, and design a range of our own.")
-RAYZEN = ("Crisp, high colour-rendering light (CRI above 90) with a tight 24° beam. Linear runs from 3W to 30W and square grilles "
-          "up to 32W, in white or black.")
+NEW_IN = "The latest additions to the range: high-CRI laser blades, miniature spotlights, track lights and garden lighting."
 
 
 class Command(BaseCommand):
@@ -118,16 +117,19 @@ class Command(BaseCommand):
             Promo.objects.create(title="Strip & profile systems", link_text="Shop profiles", category=cats["profiles"], position=13, sort_order=1)
 
         site = SiteContent.load(request_or_site=Site.objects.get(is_default_site=True))
+        if reset:
+            site.slides.all().delete()
+            site.feature_title, site.feature_eyebrow, site.feature_text, site.feature_link = "New in", "Just arrived", NEW_IN, None
         if not site.about_text:
             site.about_text = ABOUT
         if not site.feature_text:
-            site.feature_text = RAYZEN
-        site.feature_link = site.feature_link or Product.objects.filter(slug="rayzen-linear").first()
+            site.feature_text = NEW_IN
         site.save()
-        site.feature_products.set(Product.objects.filter(slug__in=["rayzen-linear", "rayzen-square"]))
+        if reset:
+            site.feature_products.clear()
         if not site.slides.exists():
             for i, (title, text, url, fb) in enumerate([("Lighting for\nmodern homes", "Shop residential", "/spaces/homes/", "warm"),
                                                          ("Specified for\ncommercial projects", "Get trade pricing", "/#commercial", "cool"),
-                                                         ("Rayzen\nlaser blades", "Explore Rayzen", "/products/downlights/rayzen-linear/", "studio")]):
+                                                         ("Outdoor and\ngarden lighting", "Shop outdoor", "/outdoor/", "warm")]):
                 HeroSlide.objects.create(site=site, title=title, link_text=text, link_url=url, fallback=fb, sort_order=i)
         self.stdout.write(self.style.SUCCESS(f"Loaded {made_n} new product ranges ({Product.objects.count()} in total)."))
