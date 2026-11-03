@@ -1,0 +1,6 @@
+{% load wagtailimages_tags %}<a class="card" href="{{ p.get_absolute_url }}">
+  <div class="ph">{% if p.is_new %}<span class="new">NEW</span>{% endif %}{% if p.cutout %}{% image p.cutout max-700x700 format-webp alt=p.name loading="lazy" %}{% else %}<span class="none">Photo coming soon</span>{% endif %}{% with room=p.gallery.first %}{% if room and room.kind == "room" %}{% image room.image fill-700x700 format-webp class="room-img" alt="" loading="lazy" %}{% endif %}{% endwith %}</div>
+  <span class="nm">{{ p.name }}</span><span class="sp">{{ p.short }}</span>
+  {% if p.finishes.all %}<span class="sw" aria-label="Finishes: {{ p.finishes.all|join:', ' }}">{% for f in p.finishes.all %}<i style="background:{{ f.swatch }}" title="{{ f.name }}"></i>{% endfor %}</span>{% endif %}
+  <span class="pr">{{ p.price_label }}</span>
+</a>

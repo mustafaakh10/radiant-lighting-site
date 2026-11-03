@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Search{% if q %}: {{ q }}{% endif %} · Radiant Lighting{% endblock %}
+{% block head %}<meta name="robots" content="noindex">{% endblock %}
+{% block content %}
+<section class="wrap search-page">
+  <h1 style="font-size:clamp(34px,4vw,52px)">Search</h1>
+  <form method="get" role="search"><label class="eyebrow muted" for="sq" style="position:absolute;left:-9999px">Search products</label><input id="sq" name="q" type="search" value="{{ q }}" placeholder="Try laser blade, 24V, profile…"><button class="btn" type="submit">Search</button></form>
+  {% if q %}<p class="muted" style="margin:0 0 24px">{{ results|length }} result{{ results|pluralize }} for “{{ q }}”</p>{% endif %}
+  <div class="grid4">{% for p in results %}{% include "partials/card.html" %}{% empty %}{% if q %}<p class="muted">Nothing found. Try a type such as “strip” or “track”, or <a class="tlink" href="{% url 'catalogue:all' %}">browse all products</a>.</p>{% endif %}{% endfor %}</div>
+</section>
+{% endblock %}

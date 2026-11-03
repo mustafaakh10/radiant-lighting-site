@@ -1,0 +1,59 @@
+{% extends "base.html" %}{% load wagtailimages_tags humanize %}
+{% block title %}{{ p.name }} · {{ p.product_type.name }} · Radiant Lighting{% endblock %}
+{% block description %}{% if p.seo_description %}{{ p.seo_description }}{% else %}{{ p.name }}: {{ p.short }}. {{ p.price_label }}. {{ p.description|truncatechars:90 }}{% endif %}{% endblock %}
+{% block og_title %}{{ p.name }} · Radiant Lighting{% endblock %}
+{% block og_type %}product{% endblock %}
+{% block og_image %}{% if pics %}<meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{{ pics.0.src }}">{% endif %}{% endblock %}
+{% block body_class %}has-bar{% endblock %}
+{% block head %}<script type="application/ld+json">{{ jsonld|safe }}</script>{% endblock %}
+{% block fab %}{% endblock %}
+{% block content %}
+<nav class="wrap crumb" aria-label="Breadcrumb"><a href="{% url 'catalogue:all' %}">Products</a><span aria-hidden="true">/</span><a href="{{ p.category.get_absolute_url }}">{{ p.category.name }}</a><span aria-hidden="true">/</span><span style="color:var(--ink)">{{ p.name }}</span></nav>
+<section class="wrap prod" id="prod">
+  <div class="thumbs" id="thumbs">{% if pics|length > 1 %}{% for x in pics %}<button data-pic="{{ forloop.counter0 }}" aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}" aria-label="Image {{ forloop.counter }}"><img src="{{ x.thumb }}" alt=""{% if x.kind != "cut" %} class="room-img"{% endif %}></button>{% endfor %}{% endif %}</div>
+  <div class="main" id="gmain">{% if pics %}<img src="{{ pics.0.src }}" alt="{{ p.name }}">{% else %}<span class="fine">Photo coming soon</span>{% endif %}{% if p.is_new %}<span class="new">NEW</span>{% endif %}</div>
+  <div class="buy">
+    <div><h1>{{ p.name }}</h1><div class="subline" id="subline">{% for f in p.finishes.all|slice:":1" %}<span>{{ f.name }}</span>{% endfor %}{% if first.model %}<span>{{ first.model }}</span>{% endif %}<span>{{ p.product_type.name }}</span></div></div>
+    <div class="fsw" id="fsw" role="group" aria-label="Finish"></div>
+    <p class="desc">{{ p.description }}</p>
+    <div class="price" id="price" aria-live="polite">{% if first.price %}PKR {{ first.price|intcomma }} <small>each</small>{% else %}{{ p.price_label }}{% endif %}</div>
+    <div id="choices"></div>
+    <details class="fullspec"><summary>Full spec</summary><dl id="fullspec"><div id="fsDyn" style="display:contents">{% if first.details %}<dt>Details</dt><dd>{{ first.details }}</dd>{% endif %}</div>{% for s in p.specs.all %}<dt>{{ s.label }}</dt><dd>{{ s.value }}</dd>{% endfor %}{% if p.warranty %}<dt>Warranty</dt><dd>{{ p.warranty }}</dd>{% endif %}</dl></details>
+    <div class="ctas"><a class="btn out" id="waOrder" href="https://wa.me/{{ data.wa }}">Order on WhatsApp</a><a class="tlink" id="waTrade" href="{{ wa_trade }}">Project pricing</a></div>
+  </div>
+</section>
+
+<section class="tabsband" aria-label="Product details"><div class="wrap">
+  <div class="ptabs" role="tablist">
+    <button role="tab" id="t-spec" aria-controls="p-spec" aria-selected="true">Specification</button>
+    {% if data.variants|length > 1 %}<button role="tab" id="t-options" aria-controls="p-options" aria-selected="false">All options</button>{% endif %}
+    <button role="tab" id="t-downloads" aria-controls="p-downloads" aria-selected="false">Downloads</button>
+    <button role="tab" id="t-warranty" aria-controls="p-warranty" aria-selected="false">Warranty &amp; delivery</button>
+  </div>
+  <div role="tabpanel" id="p-spec" aria-labelledby="t-spec"><dl class="specs" id="specs">
+    <div id="specDyn" style="display:contents"><div><dt>{{ p.variant_label }}</dt><dd>{{ first.label }}</dd></div>{% if first.details %}<div><dt>Details</dt><dd>{{ first.details }}</dd></div>{% endif %}{% if first.model %}<div><dt>Model</dt><dd>{{ first.model }}</dd></div>{% endif %}</div>
+    {% for s in p.specs.all %}<div><dt>{{ s.label }}</dt><dd>{{ s.value }}</dd></div>{% endfor %}{% if p.warranty %}<div><dt>Warranty</dt><dd>{{ p.warranty }}</dd></div>{% endif %}
+  </dl></div>
+  {% if data.variants|length > 1 %}<div role="tabpanel" id="p-options" aria-labelledby="t-options" hidden><div class="vscroll"><table class="vtable">
+    <thead><tr><th>{{ p.variant_label }}</th><th>Details</th><th>Model</th><th>Price</th></tr></thead>
+    <tbody>{% for v in data.variants %}<tr><td>{{ v.label }}</td><td>{{ v.details|default:"—" }}</td><td>{{ v.model|default:"—" }}</td><td>{% if v.prices %}{% for f, n in v.prices.items %}{{ f }} {% if n %}PKR {{ n|intcomma }}{% else %}on request{% endif %}{% if not forloop.last %}<br>{% endif %}{% endfor %}{% elif v.price %}PKR {{ v.price|intcomma }}{% else %}On request{% endif %}</td></tr>{% endfor %}</tbody>
+  </table></div></div>{% endif %}
+  <div role="tabpanel" id="p-downloads" aria-labelledby="t-downloads" hidden><div class="plist">
+    <div><span>Datasheet (PDF)</span><a class="tlink" href="{{ wa_datasheet }}">Request on WhatsApp</a></div>
+    <div><span>Photometric file (IES)</span><a class="tlink" href="{{ wa_ies }}">Request on WhatsApp</a></div>
+  </div></div>
+  <div role="tabpanel" id="p-warranty" aria-labelledby="t-warranty" hidden><div class="plist">
+    <div><span>Warranty</span><span>{{ p.warranty|default:"Ask us for this product's warranty" }}</span></div>
+    <div><span>Delivery</span><span>Across Pakistan</span></div>
+    <div><span>Showroom</span><span>{{ settings.core.SiteContent.address|linebreaksbr }}</span></div>
+    <div><span>Trade and project orders</span><a class="tlink" href="{% url 'home' %}#commercial">Get trade pricing</a></div>
+  </div></div>
+</div></section>
+
+{% if related %}<section class="wrap sec simrail" aria-labelledby="rel-h"><div class="head" style="margin-bottom:0"><h2 id="rel-h">Browse similar products</h2></div>
+  <div class="rail-wrap">{% include "partials/arrows.html" with rail="sim" %}<div class="rail" id="sim">{% for r in related %}{% include "partials/card.html" with p=r %}{% endfor %}</div></div>
+</section>{% endif %}
+
+<div class="mbar"><span>{{ p.name }}<br><span class="muted" id="mbarSub">{{ first.label }}{% if first.price %} · PKR {{ first.price|intcomma }}{% endif %}</span></span><a class="btn primary" id="waOrderM" href="https://wa.me/{{ data.wa }}">Order</a></div>
+{{ data|json_script:"product-data" }}
+{% endblock %}

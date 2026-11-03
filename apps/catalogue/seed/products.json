@@ -1,0 +1,1434 @@
+{
+ "categories": [
+  {
+   "id": "downlights",
+   "label": "Downlights & Spots",
+   "img": "tulip",
+   "subs": [
+    "COB Spotlights",
+    "Laser Blades",
+    "Cylinder Downlights"
+   ]
+  },
+  {
+   "id": "track-lights",
+   "label": "Track Lights",
+   "img": "track-decor",
+   "subs": [
+    "Track Spotlights",
+    "Track Rails"
+   ]
+  },
+  {
+   "id": "strip-rope",
+   "label": "Strip & Rope",
+   "img": "cob-strip",
+   "subs": [
+    "LED Strip",
+    "COB Strip",
+    "RGB & Effects",
+    "Rope Lights"
+   ]
+  },
+  {
+   "id": "profiles",
+   "label": "Aluminium Profiles",
+   "img": "profile",
+   "subs": [
+    "Straight",
+    "Corner",
+    "Hanging"
+   ]
+  },
+  {
+   "id": "outdoor",
+   "label": "Outdoor",
+   "img": "trail",
+   "subs": [
+    "Wall & Step",
+    "Garden"
+   ]
+  },
+  {
+   "id": "power-accessories",
+   "label": "Power & Accessories",
+   "img": "connector",
+   "subs": [
+    "Power Supplies",
+    "Dimmers",
+    "Connectors"
+   ]
+  }
+ ],
+ "products": [
+  {
+   "id": "tulip-gen-2",
+   "cat": "downlights",
+   "sub": "COB Spotlights",
+   "name": "Tulip Gen-2",
+   "img": "tulip",
+   "vlabel": "Wattage",
+   "isNew": false,
+   "app": [
+    "home",
+    "office",
+    "retail",
+    "hospitality"
+   ],
+   "cct": [
+    "warm",
+    "neutral",
+    "cool"
+   ],
+   "fin": [
+    "White",
+    "Black"
+   ],
+   "short": "COB spotlight · 5–18W",
+   "warranty": "2-year replacement warranty",
+   "desc": "Anti-glare COB spotlight with CRI above 85. One family runs from a 5W accent to an 18W downlight, in white or black, so a whole project can share one look.",
+   "base": [
+    [
+     "Light source",
+     "COB"
+    ],
+    [
+     "CRI",
+     "Ra > 85"
+    ],
+    [
+     "Beam",
+     "24° (36° option on 5W and 7W)"
+    ]
+   ],
+   "v": [
+    [
+     "5W",
+     0,
+     "450 lm · 82×51 mm · cut-out Ø70–75 mm",
+     "STSPLED-CH05"
+    ],
+    [
+     "7W",
+     0,
+     "630 lm · 82×51 mm · cut-out Ø70–75 mm",
+     "STSPLED-CH07"
+    ],
+    [
+     "9W",
+     0,
+     "810 lm · 80×51 mm · cut-out Ø70–75 mm",
+     "STSPLED-CH09"
+    ],
+    [
+     "12W",
+     1500,
+     "1,080 lm · 108×58 mm · cut-out Ø90–100 mm",
+     "STSPLED-CH12"
+    ],
+    [
+     "18W",
+     0,
+     "1,620 lm · 136×74 mm · cut-out Ø120–130 mm",
+     "STSPLED-CH18"
+    ]
+   ],
+   "def": 3,
+   "opts": [
+    [
+     "Colour temperature",
+     [
+      "3000K",
+      "4000K",
+      "6000K"
+     ]
+    ],
+    [
+     "Finish",
+     [
+      "White",
+      "Black"
+     ]
+    ]
+   ]
+  },
+  {
+   "id": "opple-35",
+   "cat": "downlights",
+   "sub": "COB Spotlights",
+   "name": "OPPLE 3.5″",
+   "img": "opple",
+   "vlabel": "Size",
+   "app": [
+    "home",
+    "office",
+    "retail",
+    "hospitality"
+   ],
+   "cct": [],
+   "fin": [
+    "White"
+   ],
+   "short": "Recessed COB · anti-glare",
+   "desc": "A 3.5-inch recessed COB spotlight with a deep black anti-glare reflector and a clean white trim.",
+   "base": [
+    [
+     "Light source",
+     "COB"
+    ],
+    [
+     "Trim",
+     "White, black reflector"
+    ]
+   ],
+   "v": [
+    [
+     "3.5-inch",
+     0,
+     "Recessed"
+    ]
+   ]
+  },
+  {
+   "id": "mini-cob",
+   "cat": "downlights",
+   "sub": "COB Spotlights",
+   "name": "Mini COB 1″",
+   "img": "mini-cob",
+   "vlabel": "Size",
+   "isNew": true,
+   "app": [
+    "home",
+    "retail"
+   ],
+   "cct": [
+    "warm",
+    "neutral",
+    "cool",
+    "colour"
+   ],
+   "fin": [
+    "Black"
+   ],
+   "short": "Miniature spotlight · 2W",
+   "desc": "A tiny 1-inch, 2W aluminium spotlight for niches, shelves, display cases and ceiling details.",
+   "base": [
+    [
+     "Power",
+     "2W"
+    ],
+    [
+     "Body",
+     "Aluminium, black"
+    ]
+   ],
+   "v": [
+    [
+     "1-inch",
+     320,
+     "2W"
+    ]
+   ],
+   "opts": [
+    [
+     "Colour",
+     [
+      "Warm",
+      "Neutral",
+      "White",
+      "Red",
+      "Green",
+      "Blue"
+     ]
+    ]
+   ]
+  },
+  {
+   "id": "linea",
+   "cat": "downlights",
+   "sub": "Laser Blades",
+   "name": "Linea",
+   "img": "linea-3",
+   "vlabel": "Heads",
+   "app": [
+    "home",
+    "office",
+    "retail",
+    "hospitality"
+   ],
+   "cct": [
+    "warm",
+    "neutral",
+    "cool"
+   ],
+   "fin": [
+    "Black"
+   ],
+   "short": "Laser blade · 1–15 heads",
+   "warranty": "1-year warranty",
+   "desc": "Recessed laser blade in black aluminium. Choose from a single head for an accent to fifteen heads for a long linear run.",
+   "base": [
+    [
+     "Body",
+     "Aluminium, black"
+    ],
+    [
+     "Power",
+     "2W per head"
+    ]
+   ],
+   "v": [
+    [
+     "1 head",
+     700,
+     "2W",
+     "",
+     "linea-1"
+    ],
+    [
+     "2 heads",
+     840,
+     "4W",
+     "",
+     "linea-2"
+    ],
+    [
+     "3 heads",
+     980,
+     "6W",
+     "",
+     "linea-3"
+    ],
+    [
+     "4 heads",
+     1400,
+     "8W · 2×2 square"
+    ],
+    [
+     "5 heads",
+     985,
+     "10W"
+    ],
+    [
+     "10 heads",
+     1990,
+     "20W"
+    ],
+    [
+     "15 heads",
+     2950,
+     "30W"
+    ]
+   ],
+   "def": 2,
+   "opts": [
+    [
+     "Colour temperature",
+     [
+      "Warm",
+      "Neutral",
+      "White"
+     ]
+    ]
+   ]
+  },
+  {
+   "id": "rayzen-linear",
+   "cat": "downlights",
+   "sub": "Laser Blades",
+   "name": "Rayzen Linear",
+   "img": "rayzen-linear",
+   "vlabel": "Wattage",
+   "isNew": true,
+   "app": [
+    "home",
+    "office",
+    "retail",
+    "hospitality"
+   ],
+   "cct": [
+    "warm",
+    "neutral"
+   ],
+   "fin": [
+    "White",
+    "Black"
+   ],
+   "short": "Laser blade · 3–30W · CRI >90",
+   "warranty": "2-year warranty",
+   "desc": "High colour-rendering laser blade, CRI above 90 with a tight 24° beam. From a single 3W module to a 30W, 15-module run.",
+   "base": [
+    [
+     "CRI",
+     "Ra > 90"
+    ],
+    [
+     "Beam",
+     "24°"
+    ]
+   ],
+   "v": [
+    [
+     "3W",
+     1000,
+     "1 module · 240 lm · 44×44×31 mm · cut-out 39×36 mm",
+     "STSPLED-0359"
+    ],
+    [
+     "6W",
+     1465,
+     "3 modules · 480 lm · 92×44×31 mm · cut-out 87×36 mm",
+     "STSPLED-0659"
+    ],
+    [
+     "10W",
+     2535,
+     "5 modules · 800 lm · 147×44×31 mm · cut-out 141×36 mm",
+     "STSPLED-1059"
+    ],
+    [
+     "20W",
+     3335,
+     "10 modules · 1,600 lm · 280×44×31 mm · cut-out 275×36 mm",
+     "STSPLED-2059"
+    ],
+    [
+     "30W",
+     6400,
+     "15 modules · 2,400 lm · 412×44×31 mm · cut-out 406×36 mm",
+     "STSPLED-3059"
+    ]
+   ],
+   "def": 2,
+   "opts": [
+    [
+     "Colour temperature",
+     [
+      "3000K",
+      "4000K"
+     ]
+    ],
+    [
+     "Finish",
+     [
+      "White",
+      "Black"
+     ]
+    ]
+   ]
+  },
+  {
+   "id": "rayzen-square",
+   "cat": "downlights",
+   "sub": "Laser Blades",
+   "name": "Rayzen Square",
+   "img": "rayzen-square",
+   "vlabel": "Wattage",
+   "isNew": true,
+   "app": [
+    "office",
+    "retail",
+    "hospitality"
+   ],
+   "cct": [
+    "warm",
+    "neutral"
+   ],
+   "fin": [
+    "White",
+    "Black"
+   ],
+   "short": "Square grille · 8–32W · CRI >90",
+   "warranty": "2-year warranty",
+   "desc": "The square Rayzen grille: high-CRI light with a 24° beam, in three sizes for ceilings that need more output.",
+   "base": [
+    [
+     "CRI",
+     "Ra > 90"
+    ],
+    [
+     "Beam",
+     "24°"
+    ]
+   ],
+   "v": [
+    [
+     "8W",
+     0,
+     "640 lm · 74×74×33 mm · cut-out 66×66 mm",
+     "STSPLED-0858"
+    ],
+    [
+     "18W",
+     0,
+     "1,440 lm · 103×103×33 mm · cut-out 95×95 mm",
+     "STSPLED-1858"
+    ],
+    [
+     "32W",
+     0,
+     "2,560 lm · 133×133×33 mm · cut-out 125×125 mm",
+     "STSPLED-3258"
+    ]
+   ],
+   "opts": [
+    [
+     "Colour temperature",
+     [
+      "3000K",
+      "4000K"
+     ]
+    ],
+    [
+     "Finish",
+     [
+      "White",
+      "Black"
+     ]
+    ]
+   ]
+  },
+  {
+   "id": "phoenix",
+   "cat": "downlights",
+   "sub": "Cylinder Downlights",
+   "name": "Phoenix",
+   "img": "phoenix",
+   "vlabel": "Wattage",
+   "app": [
+    "home",
+    "retail",
+    "hospitality"
+   ],
+   "cct": [],
+   "fin": [
+    "Black"
+   ],
+   "short": "Surface cylinder · 18W",
+   "warranty": "2-year replacement warranty",
+   "desc": "A surface-mounted cylinder downlight in matte black, for ceilings that cannot be cut and spaces that want the fitting on show.",
+   "base": [
+    [
+     "Mounting",
+     "Surface"
+    ],
+    [
+     "Finish",
+     "Black"
+    ]
+   ],
+   "v": [
+    [
+     "18W",
+     4699,
+     "",
+     "RL-PX18-BK"
+    ]
+   ]
+  },
+  {
+   "id": "convex",
+   "cat": "downlights",
+   "sub": "Cylinder Downlights",
+   "name": "Convex",
+   "img": "convex",
+   "vlabel": "Wattage",
+   "app": [
+    "home",
+    "retail",
+    "hospitality"
+   ],
+   "cct": [],
+   "fin": [],
+   "short": "Surface cylinder · 15W",
+   "desc": "A compact surface-mounted cylinder downlight, 15W.",
+   "base": [
+    [
+     "Mounting",
+     "Surface"
+    ]
+   ],
+   "v": [
+    [
+     "15W",
+     2599,
+     "",
+     "RL-CV15-BK"
+    ]
+   ]
+  },
+  {
+   "id": "decor-track",
+   "cat": "track-lights",
+   "sub": "Track Spotlights",
+   "name": "Decor Series",
+   "img": "track-decor",
+   "vlabel": "Wattage",
+   "isNew": true,
+   "app": [
+    "home",
+    "office",
+    "retail"
+   ],
+   "cct": [
+    "warm",
+    "neutral",
+    "cool"
+   ],
+   "fin": [
+    "Black"
+   ],
+   "short": "Track spotlight · 10 / 20W · CRI >90",
+   "desc": "COB track spotlight with CRI above 90 in a black body. Aim it at shelves, artwork and displays, and move it whenever the layout changes.",
+   "base": [
+    [
+     "Light source",
+     "COB"
+    ],
+    [
+     "CRI",
+     "Ra > 90"
+    ],
+    [
+     "Input",
+     "175–265V"
+    ],
+    [
+     "Body",
+     "Black"
+    ]
+   ],
+   "v": [
+    [
+     "10W",
+     1500,
+     ""
+    ],
+    [
+     "20W",
+     1800,
+     ""
+    ]
+   ],
+   "opts": [
+    [
+     "Colour temperature",
+     [
+      "3000K",
+      "4000K",
+      "6000K"
+     ]
+    ]
+   ]
+  },
+  {
+   "id": "aluminium-track",
+   "cat": "track-lights",
+   "sub": "Track Rails",
+   "name": "Aluminium Track",
+   "img": "track",
+   "vlabel": "Length",
+   "app": [
+    "home",
+    "office",
+    "retail"
+   ],
+   "cct": [],
+   "fin": [
+    "Black"
+   ],
+   "short": "Track rail · 1 metre",
+   "desc": "Aluminium track rail for track spotlights, sold by the metre.",
+   "base": [
+    [
+     "Material",
+     "Aluminium"
+    ]
+   ],
+   "v": [
+    [
+     "1 metre",
+     450,
+     ""
+    ]
+   ]
+  },
+  {
+   "id": "led-strip",
+   "cat": "strip-rope",
+   "sub": "LED Strip",
+   "name": "LED Strip",
+   "img": "",
+   "vlabel": "Type",
+   "app": [
+    "home",
+    "retail",
+    "hospitality"
+   ],
+   "cct": [
+    "warm",
+    "neutral",
+    "cool"
+   ],
+   "fin": [],
+   "short": "12V / 24V / 220V · 5–21M rolls",
+   "desc": "SMD LED strip for coves, shelves, cabinets and under-counter light. Low-voltage rolls need a matching power supply; 220V rolls plug in directly.",
+   "base": [
+    [
+     "Width",
+     "5–8 mm"
+    ]
+   ],
+   "v": [
+    [
+     "12V · 120D · 10M",
+     1450,
+     "10W/m · 8 mm · 120 LEDs/m"
+    ],
+    [
+     "12V · 240D · 10M",
+     2140,
+     "10W/m · 8 mm · 240 LEDs/m"
+    ],
+    [
+     "12V · 21M",
+     3750,
+     "8W/m · 5 mm"
+    ],
+    [
+     "24V · 320D · 10M",
+     3140,
+     "15W/m · 8 mm · 320 LEDs/m"
+    ],
+    [
+     "24V · 5M",
+     1900,
+     "7W/m · 5 mm"
+    ],
+    [
+     "220V · 120D · 10M",
+     1500,
+     "12W/m · 8 mm · 120 LEDs/m"
+    ],
+    [
+     "220V · 240D · 10M",
+     2700,
+     "24W/m · 8 mm · 240 LEDs/m"
+    ]
+   ],
+   "opts": [
+    [
+     "Colour temperature",
+     [
+      "Warm",
+      "Neutral",
+      "White"
+     ]
+    ]
+   ]
+  },
+  {
+   "id": "cob-strip",
+   "cat": "strip-rope",
+   "sub": "COB Strip",
+   "name": "COB Strip",
+   "img": "cob-strip",
+   "vlabel": "Type",
+   "app": [
+    "home",
+    "office",
+    "retail",
+    "hospitality"
+   ],
+   "cct": [
+    "warm",
+    "neutral",
+    "cool",
+    "tunable",
+    "colour"
+   ],
+   "fin": [],
+   "short": "Dot-free strip · whites, colours, 3CCT",
+   "desc": "Dot-free COB strip that reads as one continuous line of light, even without a diffuser. Whites, five colours and a tunable 3CCT roll.",
+   "base": [
+    [
+     "Roll",
+     "10 m"
+    ]
+   ],
+   "v": [
+    [
+     "12V",
+     1950,
+     "12W/m · 8 mm"
+    ],
+    [
+     "24V",
+     1950,
+     "12W/m · 8 mm"
+    ],
+    [
+     "24V Slim 5mm",
+     2550,
+     "8W/m · 5 mm"
+    ],
+    [
+     "220V",
+     2450,
+     "10W/m · 8 mm"
+    ],
+    [
+     "24V Blue",
+     2550,
+     "12W/m · 8 mm · blue"
+    ],
+    [
+     "24V Green",
+     2550,
+     "12W/m · 8 mm · green"
+    ],
+    [
+     "24V Orange",
+     2550,
+     "12W/m · 8 mm · orange"
+    ],
+    [
+     "24V Pink",
+     2550,
+     "12W/m · 8 mm · pink"
+    ],
+    [
+     "24V Red",
+     2550,
+     "12W/m · 8 mm · red"
+    ],
+    [
+     "24V 3CCT",
+     4900,
+     "15W/m · 8 mm · tunable 2700–6500K"
+    ]
+   ],
+   "def": 1,
+   "opts": [
+    [
+     "Colour temperature",
+     [
+      "Warm",
+      "Neutral",
+      "White"
+     ]
+    ]
+   ],
+   "optsFor": [
+    0,
+    1,
+    2,
+    3
+   ]
+  },
+  {
+   "id": "rgb-pixel-strip",
+   "cat": "strip-rope",
+   "sub": "RGB & Effects",
+   "name": "RGB & Pixel Strip",
+   "img": "rgb-strip",
+   "vlabel": "Type",
+   "app": [
+    "retail",
+    "hospitality",
+    "home"
+   ],
+   "cct": [
+    "colour"
+   ],
+   "fin": [],
+   "short": "RGB, pixel and running · app control",
+   "desc": "Colour-changing and effect strips controlled from a mobile app, for signage, bars, facades and feature walls.",
+   "base": [
+    [
+     "Roll",
+     "10 m"
+    ],
+    [
+     "Control",
+     "Mobile app"
+    ]
+   ],
+   "v": [
+    [
+     "RGB 12V",
+     2790,
+     "90 LEDs/m · 8 mm"
+    ],
+    [
+     "RGB 24V",
+     2290,
+     "60 LEDs/m · 8 mm"
+    ],
+    [
+     "Pixel RGB 24V",
+     4900,
+     "64 LEDs/m · 10 mm"
+    ],
+    [
+     "Running 24V",
+     2990,
+     "126 LEDs/m · 8 mm"
+    ]
+   ]
+  },
+  {
+   "id": "rope-lights",
+   "cat": "strip-rope",
+   "sub": "Rope Lights",
+   "name": "Rope Lights",
+   "img": "rope",
+   "vlabel": "Type",
+   "loc": "outdoor",
+   "app": [
+    "outdoor",
+    "hospitality"
+   ],
+   "cct": [
+    "warm",
+    "neutral",
+    "cool",
+    "colour"
+   ],
+   "fin": [],
+   "short": "LED and COB rope · 50–100M",
+   "desc": "Long-run LED and COB rope for facades, boundary walls, events and large interiors, up to 100 metres per roll.",
+   "base": [
+    [
+     "Input",
+     "220V"
+    ]
+   ],
+   "v": [
+    [
+     "LED rope 88D · 70M",
+     6700,
+     "88 LEDs/m · 6 mm"
+    ],
+    [
+     "LED rope 120D · 100M",
+     11500,
+     "120 LEDs/m · 8 mm"
+    ],
+    [
+     "COB rope 288D · 50M",
+     12500,
+     "288 LEDs/m · 8 mm"
+    ],
+    [
+     "COB rope 320D · 50M",
+     16500,
+     "320 LEDs/m · 8 mm"
+    ],
+    [
+     "COB rope 320D · 100M",
+     29500,
+     "320 LEDs/m · 8 mm"
+    ],
+    [
+     "COB outdoor roll · 50M",
+     18500,
+     "Waterproof · 8 mm"
+    ]
+   ],
+   "opts": [
+    [
+     "Colour temperature",
+     [
+      "Warm",
+      "Neutral",
+      "White"
+     ]
+    ]
+   ]
+  },
+  {
+   "id": "straight-profiles",
+   "cat": "profiles",
+   "sub": "Straight",
+   "name": "Straight Profiles",
+   "img": "profile",
+   "vlabel": "Width",
+   "app": [
+    "home",
+    "office",
+    "retail"
+   ],
+   "cct": [],
+   "fin": [
+    "Silver",
+    "Black"
+   ],
+   "short": "8–75mm · 10 ft · bezel or trimless",
+   "desc": "Aluminium channels with a diffuser that turn strip light into a clean architectural line. 10 ft lengths, surface bezel or plaster-in trimless.",
+   "base": [
+    [
+     "Length",
+     "10 ft"
+    ],
+    [
+     "Material",
+     "Aluminium with diffuser"
+    ]
+   ],
+   "v": [
+    [
+     "8mm",
+     {
+      "Silver": 1290,
+      "Black": 1360
+     },
+     ""
+    ],
+    [
+     "10mm",
+     {
+      "Silver": 830,
+      "Black": 930
+     },
+     ""
+    ],
+    [
+     "17mm",
+     {
+      "Silver": 830,
+      "Black": 930
+     },
+     ""
+    ],
+    [
+     "25mm",
+     {
+      "Silver": 1650,
+      "Black": 1850
+     },
+     ""
+    ],
+    [
+     "40mm",
+     {
+      "Silver": 3360,
+      "Black": 3710
+     },
+     ""
+    ],
+    [
+     "50mm",
+     {
+      "Silver": 3750,
+      "Black": 4140
+     },
+     ""
+    ],
+    [
+     "75mm",
+     {
+      "Silver": 7070,
+      "Black": 7425
+     },
+     ""
+    ]
+   ],
+   "def": 2,
+   "opts": [
+    [
+     "Type",
+     [
+      "Bezel",
+      "Trimless"
+     ]
+    ]
+   ]
+  },
+  {
+   "id": "corner-profiles",
+   "cat": "profiles",
+   "sub": "Corner",
+   "name": "Corner Profiles",
+   "img": "",
+   "vlabel": "Width",
+   "app": [
+    "home",
+    "office"
+   ],
+   "cct": [],
+   "fin": [
+    "Silver",
+    "Black"
+   ],
+   "short": "16–75mm · 10 ft",
+   "desc": "Corner channels for ceiling-to-wall joints and cabinet edges, including a 75mm indirect profile that washes light up the wall.",
+   "base": [
+    [
+     "Length",
+     "10 ft"
+    ]
+   ],
+   "v": [
+    [
+     "16mm",
+     {
+      "Silver": 1570,
+      "Black": 1790
+     },
+     ""
+    ],
+    [
+     "35mm",
+     {
+      "Silver": 5570,
+      "Black": 6000
+     },
+     ""
+    ],
+    [
+     "75mm",
+     {
+      "Silver": 11710,
+      "Black": 12500
+     },
+     ""
+    ],
+    [
+     "75mm indirect",
+     {
+      "Silver": 19500,
+      "Black": 21000
+     },
+     "Indirect light"
+    ]
+   ]
+  },
+  {
+   "id": "hanging-profiles",
+   "cat": "profiles",
+   "sub": "Hanging",
+   "name": "Hanging Profiles",
+   "img": "",
+   "vlabel": "Size",
+   "app": [
+    "office",
+    "retail",
+    "home"
+   ],
+   "cct": [],
+   "fin": [
+    "Silver",
+    "Black",
+    "White"
+   ],
+   "short": "Suspended linear · 25–75mm",
+   "desc": "Suspended linear profiles for offices, kitchen islands, retail counters and meeting tables.",
+   "base": [
+    [
+     "Mounting",
+     "Suspended"
+    ]
+   ],
+   "v": [
+    [
+     "25mm · 10 ft",
+     {
+      "Silver": 12000,
+      "Black": 14000
+     },
+     ""
+    ],
+    [
+     "40mm · 4 ft",
+     {
+      "Black": 9600,
+      "White": 18000
+     },
+     ""
+    ],
+    [
+     "70mm · 4 ft",
+     {
+      "Black": 13500
+     },
+     ""
+    ],
+    [
+     "75mm · 2 ft",
+     {
+      "Black": 4800
+     },
+     ""
+    ],
+    [
+     "75mm · 10 ft",
+     {
+      "Silver": 19000,
+      "Black": 24000
+     },
+     ""
+    ]
+   ]
+  },
+  {
+   "id": "trail",
+   "cat": "outdoor",
+   "sub": "Wall & Step",
+   "name": "Trail",
+   "img": "trail",
+   "vlabel": "Wattage",
+   "loc": "outdoor",
+   "app": [
+    "outdoor",
+    "home",
+    "hospitality"
+   ],
+   "cct": [],
+   "fin": [
+    "Black"
+   ],
+   "short": "Wall / step light · 3W · IP65",
+   "desc": "A recessed wall and step light with a louvred face, rated IP65 for outdoor stairs, paths and garden walls.",
+   "base": [
+    [
+     "Protection",
+     "IP65"
+    ],
+    [
+     "CRI",
+     "Ra > 80"
+    ],
+    [
+     "Size",
+     "85×85×53 mm"
+    ]
+   ],
+   "v": [
+    [
+     "3W",
+     4850,
+     "140 lm"
+    ]
+   ]
+  },
+  {
+   "id": "planter-spike",
+   "cat": "outdoor",
+   "sub": "Garden",
+   "name": "Planter Spike",
+   "img": "",
+   "vlabel": "Wattage",
+   "loc": "outdoor",
+   "isNew": true,
+   "app": [
+    "outdoor"
+   ],
+   "cct": [
+    "warm",
+    "neutral",
+    "cool"
+   ],
+   "fin": [],
+   "short": "Garden spike light · 7W",
+   "desc": "A 7W spike light for planters, trees and garden beds.",
+   "base": [
+    [
+     "Use",
+     "Outdoor"
+    ]
+   ],
+   "v": [
+    [
+     "7W",
+     0,
+     ""
+    ]
+   ],
+   "opts": [
+    [
+     "Colour temperature",
+     [
+      "3000K",
+      "4000K",
+      "6000K"
+     ]
+    ]
+   ]
+  },
+  {
+   "id": "power-supply-12v",
+   "cat": "power-accessories",
+   "sub": "Power Supplies",
+   "name": "Power Supply 12V",
+   "img": "",
+   "vlabel": "Power",
+   "app": [],
+   "cct": [],
+   "fin": [],
+   "short": "Constant voltage · 60–400W",
+   "desc": "Constant-voltage 12V DC power supplies for 12V strip lights. Size it about 20% above the total strip load.",
+   "base": [
+    [
+     "Output",
+     "12V DC, constant voltage"
+    ]
+   ],
+   "v": [
+    [
+     "60W",
+     930,
+     ""
+    ],
+    [
+     "100W",
+     1300,
+     ""
+    ],
+    [
+     "100W Premium",
+     1500,
+     ""
+    ],
+    [
+     "200W",
+     1925,
+     ""
+    ],
+    [
+     "200W Premium",
+     2200,
+     ""
+    ],
+    [
+     "250W Slim",
+     2450,
+     ""
+    ],
+    [
+     "300W",
+     2500,
+     ""
+    ],
+    [
+     "400W",
+     2800,
+     ""
+    ]
+   ]
+  },
+  {
+   "id": "power-supply-24v",
+   "cat": "power-accessories",
+   "sub": "Power Supplies",
+   "name": "Power Supply 24V",
+   "img": "",
+   "vlabel": "Power",
+   "app": [],
+   "cct": [],
+   "fin": [],
+   "short": "Constant voltage · 36–400W",
+   "desc": "Constant-voltage 24V DC power supplies for 24V strip lights. Size it about 20% above the total strip load.",
+   "base": [
+    [
+     "Output",
+     "24V DC, constant voltage"
+    ]
+   ],
+   "v": [
+    [
+     "36W Slim",
+     790,
+     ""
+    ],
+    [
+     "100W",
+     1300,
+     ""
+    ],
+    [
+     "200W",
+     1950,
+     ""
+    ],
+    [
+     "300W",
+     2500,
+     ""
+    ],
+    [
+     "400W",
+     2800,
+     ""
+    ]
+   ]
+  },
+  {
+   "id": "strip-dimmers",
+   "cat": "power-accessories",
+   "sub": "Dimmers",
+   "name": "Strip Dimmers",
+   "img": "",
+   "vlabel": "Type",
+   "app": [],
+   "cct": [],
+   "fin": [],
+   "short": "Knob or touch remote · 12–24V",
+   "desc": "Dimmers for 12–24V strip lights, as a rotary knob or a wireless touch remote.",
+   "base": [
+    [
+     "For",
+     "12–24V strips"
+    ]
+   ],
+   "v": [
+    [
+     "Rotary knob",
+     1550,
+     ""
+    ],
+    [
+     "Touch remote",
+     3400,
+     ""
+    ]
+   ]
+  },
+  {
+   "id": "strip-connectors",
+   "cat": "power-accessories",
+   "sub": "Connectors",
+   "name": "Strip Connectors",
+   "img": "connector",
+   "vlabel": "Type",
+   "app": [],
+   "cct": [],
+   "fin": [],
+   "short": "L, straight and wire · 8mm strip",
+   "desc": "Snap-on connectors for 8mm strips: 90° corners, straight joins and power leads, with no soldering.",
+   "base": [
+    [
+     "For",
+     "8 mm strip"
+    ]
+   ],
+   "v": [
+    [
+     "L-connector",
+     85,
+     "90° corner joint"
+    ],
+    [
+     "Straight connector",
+     75,
+     "Strip-to-strip joint"
+    ],
+    [
+     "Wire connector",
+     95,
+     "Strip to power lead"
+    ]
+   ]
+  }
+ ]
+}

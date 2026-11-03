@@ -1,0 +1,53 @@
+{% extends "base.html" %}{% load wagtailimages_tags %}
+{% block title %}{{ title }} · Radiant Lighting{% endblock %}
+{% block og_title %}{{ title }} · Radiant Lighting{% endblock %}
+{% block description %}{{ title }} from Radiant Lighting, Multan: {{ count }} ranges of architectural LED lighting with prices, delivered across Pakistan.{% endblock %}
+{% block content %}
+<section class="wrap cat-head">
+  <nav class="crumb" aria-label="Breadcrumb" style="padding-top:0;margin-bottom:12px"><a href="{% url 'home' %}">Home</a><span aria-hidden="true">/</span><a href="{% url 'catalogue:all' %}">Products</a>{% if title != "All products" %}<span aria-hidden="true">/</span><span style="color:var(--ink)">{{ title }}</span>{% endif %}</nav>
+  <h1>{{ title }}</h1>
+</section>
+<section class="wrap catalog">
+  <aside class="filters" id="filters" aria-label="Filters">
+    <form id="filterForm" method="get" action="{{ action }}">
+      <div class="ftop"><h2>Filter by</h2><button type="button" class="ico" data-fclose aria-label="Close filters"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+      <input type="hidden" name="sort" value="{{ sort }}">
+      <details open><summary>Category</summary><div class="opts">
+        {% for c in filters.category %}
+          <label class="chk"><input type="checkbox" name="category" value="{{ c.value }}"{% if c.on %} checked{% endif %}{% if path_locked.category == c.value %} disabled{% endif %}>{{ c.label }}<small>{{ c.n }}</small></label>
+          {% for t in c.types %}<label class="chk sub"><input type="checkbox" name="type" value="{{ t.value }}"{% if t.on %} checked{% endif %}>{{ t.label }}<small>{{ t.n }}</small></label>{% endfor %}
+        {% endfor %}
+      </div></details>
+      <details{% if path_locked.location or request.GET.location %} open{% endif %}><summary>Location</summary><div class="opts">
+        {% for o in filters.location %}<label class="chk"><input type="checkbox" name="location" value="{{ o.value }}"{% if o.on %} checked{% endif %}{% if path_locked.location == o.value %} disabled{% endif %}>{{ o.label }}<small>{{ o.n }}</small></label>{% endfor %}
+      </div></details>
+      <details{% if path_locked.space or request.GET.space %} open{% endif %}><summary>Application</summary><div class="opts">
+        {% for o in filters.space %}<label class="chk"><input type="checkbox" name="space" value="{{ o.value }}"{% if o.on %} checked{% endif %}{% if path_locked.space == o.value %} disabled{% endif %}>{{ o.label }}<small>{{ o.n }}</small></label>{% endfor %}
+      </div></details>
+      <details{% if request.GET.cct %} open{% endif %}><summary>Colour temperature</summary><div class="opts">
+        {% for o in filters.cct %}<label class="chk"><input type="checkbox" name="cct" value="{{ o.value }}"{% if o.on %} checked{% endif %}>{{ o.label }}<small>{{ o.n }}</small></label>{% endfor %}
+      </div></details>
+      <details{% if request.GET.finish %} open{% endif %}><summary>Finish</summary><div class="opts">
+        {% for o in filters.finish %}<label class="chk"><input type="checkbox" name="finish" value="{{ o.value }}"{% if o.on %} checked{% endif %}><i style="width:16px;height:16px;border:1px solid #BDBAB3;background:{{ o.swatch }}" aria-hidden="true"></i>{{ o.label }}<small>{{ o.n }}</small></label>{% endfor %}
+      </div></details>
+      <button class="btn nojs-apply" type="submit">Apply filters</button>
+      {% if request.GET %}<a class="clear" href="{{ action }}" style="display:inline-block">Clear all filters</a>{% endif %}
+      <div class="apply"><button class="btn primary" type="button" data-fclose>Show {{ count }} result{{ count|pluralize }}</button></div>
+    </form>
+  </aside>
+  <div>
+    <div class="bar"><span>Showing {{ count }} of {{ total }} ranges</span>
+      <span style="display:flex;gap:12px;align-items:center"><button class="fbtn" type="button" data-fopen>Filters{% if active %} ({{ active }}){% endif %}</button>
+      <label for="sort">Sort<select id="sort" form="filterForm" name="sort">{% for v, l in sorts %}<option value="{{ v }}"{% if v == sort %} selected{% endif %}>{{ l }}</option>{% endfor %}</select></label></span></div>
+    <div class="grid" id="grid">
+      {% for cell in cells %}
+        {% if cell.promo %}{% with pr=cell.promo %}
+          <a class="promo" href="{{ pr.url }}"><div class="slot{% if pr.photo %} has-photo{% endif %}">{% if pr.photo %}{% image pr.photo fill-700x930 format-webp class="photo" alt="" loading="lazy" %}{% else %}<div class="fb">{% if pr.cutout %}{% image pr.cutout max-600x600 format-webp alt="" loading="lazy" %}{% endif %}</div>{% endif %}<div class="ov"></div></div><div class="t"><h3>{{ pr.title }}</h3><span class="tlink">{{ pr.link_text }}</span></div></a>
+        {% endwith %}{% else %}{% include "partials/card.html" with p=cell.product %}{% endif %}
+      {% empty %}
+        <p class="empty">No products match these filters. <a class="clear" href="{{ action }}">Clear all filters</a></p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

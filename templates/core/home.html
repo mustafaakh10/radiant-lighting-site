@@ -1,0 +1,70 @@
+{% extends "base.html" %}{% load wagtailimages_tags humanize %}
+{% block og_title %}Radiant Lighting · Architectural LED lighting, Multan{% endblock %}
+{% block head %}<script type="application/ld+json">{"@context":"https://schema.org","@type":"Store","name":"Radiant Lighting","telephone":"+{{ site.whatsapp }}","email":"{{ site.email }}","address":{"@type":"PostalAddress","streetAddress":"{{ site.address|linebreaksbr|striptags|escapejs }}","addressLocality":"Multan","addressCountry":"PK"},"url":"{{ request.build_absolute_uri }}"}</script>{% endblock %}
+{% block content %}
+<section class="hero" aria-roledescription="carousel" aria-label="Featured">
+  {% for s in slides %}
+  <div class="slide{% if forloop.first %} on{% endif %}{% if s.fallback == 'studio' %} slide-3{% endif %}" aria-hidden="{% if forloop.first %}false{% else %}true{% endif %}">
+    <div class="slot{% if s.image %} has-photo{% endif %}">
+      {% if s.image %}{% image s.image fill-2400x1100 format-webp class="photo" alt="" %}{% if forloop.first %}{% endif %}
+      {% elif s.fallback == "studio" %}<div class="fb fb-hero3">{% if site.feature_link.cutout %}{% image site.feature_link.cutout max-900x600 format-webp alt="" %}{% endif %}</div>
+      {% elif s.fallback == "cool" %}<div class="fb fb-hero2"></div>{% else %}<div class="fb fb-hero1"></div>{% endif %}
+      <div class="ov"></div>
+    </div>
+    <div class="txt"><div class="wrap"><h2>{{ s.title|linebreaksbr }}</h2><a class="tlink" href="{{ s.link_url }}"{% if not forloop.first %} tabindex="-1"{% endif %}>{{ s.link_text }}</a></div></div>
+  </div>
+  {% endfor %}
+  {% if slides|length > 1 %}<div class="dots" role="group" aria-label="Choose slide">{% for s in slides %}<button data-slide="{{ forloop.counter0 }}" aria-label="Slide {{ forloop.counter }}" aria-current="{% if forloop.first %}true{% else %}false{% endif %}"><i></i></button>{% endfor %}</div>{% endif %}
+</section>
+
+<section class="wrap sec">
+  <div class="intro">
+    <div><h1 style="font-size:clamp(30px,3vw,40px);line-height:1.15">{{ site.intro_title }}</h1><p>{{ site.intro_text }}</p><a class="tlink" href="{% url 'catalogue:all' %}">Explore all products</a></div>
+    <div class="rail-wrap">{% include "partials/arrows.html" with rail="spaces" %}
+      <div class="rail" id="spaces">{% for a in spaces %}
+        <a class="space" href="{{ a.get_absolute_url }}"><div class="slot{% if a.photo %} has-photo{% endif %}">{% if a.photo %}{% image a.photo fill-600x750 format-webp class="photo" alt="" loading="lazy" %}{% else %}<div class="fb">{% if a.cutout %}{% image a.cutout max-500x500 format-webp alt="" loading="lazy" %}{% endif %}</div>{% endif %}</div><span>{{ a.name }}</span></a>
+      {% endfor %}</div>
+    </div>
+  </div>
+</section>
+
+{% if site.feature_title %}
+<section class="feature" aria-labelledby="feat-h">
+  <div class="feature-top">
+    <div class="feature-panel"><div><span class="eyebrow">{{ site.feature_eyebrow }}</span><h2 id="feat-h">{{ site.feature_title }}</h2>{% if site.feature_text %}<p>{{ site.feature_text }}</p>{% endif %}{% if site.feature_link %}<a class="tlink" href="{{ site.feature_link.get_absolute_url }}">Discover {{ site.feature_link.name }}</a>{% endif %}</div></div>
+    <div class="feature-img slot{% if site.feature_image %} has-photo{% endif %}">{% if site.feature_image %}{% image site.feature_image fill-2000x1400 format-webp class="photo" alt="" loading="lazy" %}{% else %}<div class="fb">{% for c in feature_cards|slice:":1" %}{% image c.image max-900x600 format-webp alt="" style="width:46%;left:10%;top:22%;transform:rotate(-14deg)" %}{% endfor %}{% with last=feature_cards|last %}{% if last %}{% image last.image max-500x500 format-webp alt="" style="width:20%;right:14%;top:30%;transform:rotate(8deg)" %}{% endif %}{% endwith %}{% for c in feature_cards|slice:":1" %}{% image c.image max-700x500 format-webp alt="" style="width:30%;left:36%;top:52%;transform:rotate(-14deg)" %}{% endfor %}</div>{% endif %}</div>
+  </div>
+  {% if feature_cards %}<div class="feature-row"><div class="rail-wrap">{% include "partials/arrows.html" with rail="feat" %}<div class="rail" id="feat">{% for c in feature_cards %}
+    <a class="card" href="{{ c.product.get_absolute_url }}"><div class="ph">{% if c.product.is_new %}<span class="new">NEW</span>{% endif %}{% if c.image %}{% image c.image max-600x600 format-webp alt="" loading="lazy" %}{% endif %}</div>
+      <span class="nm">{{ c.product.name }} {{ c.variant.label }}</span>{% if c.product.finishes.all %}<span class="sw">{% for f in c.product.finishes.all %}<i style="background:{{ f.swatch }}" title="{{ f.name }}"></i>{% endfor %}</span>{% endif %}<span class="pr">{% if c.variant.price %}PKR {{ c.variant.price|intcomma }}{% else %}Price on request{% endif %}</span></a>
+  {% endfor %}</div></div></div>{% endif %}
+</section>
+{% endif %}
+
+<section class="wrap sec" aria-labelledby="cat-h">
+  <div class="head"><h2 id="cat-h">Shop by category</h2><a class="tlink" href="{% url 'catalogue:all' %}">View all</a></div>
+  <div class="bento">{% for c in categories %}
+    <a class="{% if forloop.counter == 2 %}tall{% endif %}" href="{{ c.get_absolute_url }}"><div class="slot{% if c.photo %} has-photo{% endif %}">{% if c.photo %}{% image c.photo fill-1000x750 format-webp class="photo" alt="" loading="lazy" %}{% else %}<div class="fb">{% if c.cutout %}{% image c.cutout max-600x600 format-webp alt="" loading="lazy" %}{% endif %}</div>{% endif %}<div class="ov"></div></div><span class="lbl">{{ c.name }}</span><small>{{ c.range_count }} range{{ c.range_count|pluralize }}</small></a>
+  {% endfor %}</div>
+</section>
+
+<section class="band" id="commercial" aria-labelledby="com-h">
+  <div class="wrap">
+    <div><span class="eyebrow" style="color:var(--sage)">Commercial &amp; trade</span><h2 id="com-h" style="margin-top:12px">{{ site.trade_title }}</h2><p>{{ site.trade_text }}</p><a class="tlink" href="{{ wa_trade }}">Send your BOQ on WhatsApp</a></div>
+    <div class="facts"><div><b>15+</b><span>years in lighting</span></div><div><b>3</b><span>global brands distributed</span></div><div><b>{{ range_total }}</b><span>product ranges in stock</span></div><div><b>PK</b><span>delivery across Pakistan</span></div></div>
+  </div>
+</section>
+
+<section class="wrap sec" id="about" aria-labelledby="about-h">
+  <div class="about"><h2 id="about-h">{{ site.about_title }}</h2>{% if site.about_text %}<p>{{ site.about_text }}</p>{% endif %}</div>
+  {% if site.brand_list %}<div class="brands-row" style="margin-top:56px" aria-label="Brands">{% for b in site.brand_list %}<b>{{ b }}</b>{% endfor %}</div>{% endif %}
+</section>
+
+<section class="showroom" id="contact" aria-labelledby="show-h" style="margin-top:104px">
+  <div class="txt"><span class="eyebrow muted">Visit the showroom</span><h2 id="show-h">See the light before you buy it.</h2>
+    <address>{{ site.address|linebreaksbr }}</address>
+    <span class="fine">WhatsApp {{ site.whatsapp_display }} · {{ site.email }}</span>
+    <div class="row"><a class="tlink" href="https://wa.me/{{ site.whatsapp }}">WhatsApp us</a><a class="tlink" href="https://www.google.com/maps/search/?api=1&amp;query={{ site.maps_query|urlencode }}">Get directions</a></div></div>
+  <div class="slot{% if site.showroom_image %} has-photo{% endif %}">{% if site.showroom_image %}{% image site.showroom_image fill-1600x1100 format-webp class="photo" alt="Radiant Lighting showroom" loading="lazy" %}{% else %}<div class="fb"></div>{% endif %}</div>
+</section>
+{% endblock %}
