@@ -1,0 +1,6 @@
+{% load wagtailimages_tags %}<a class="pcard" href="{{ g.get_absolute_url }}">
+  <div class="ph">{% if g.cover %}{% image g.cover fill-900x675 format-webp loading="lazy" alt="" %}{% endif %}</div>
+  <span class="meta">{{ g.get_topic_display }} · {{ g.read_minutes }} min read</span>
+  <h{{ h|default:"2" }}>{{ g.title }}</h{{ h|default:"2" }}>
+  <p>{{ g.summary }}</p>
+</a>

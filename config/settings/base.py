@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     "apps.core",
     "apps.catalogue",
     "apps.projects",
+    "apps.guides",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
     "wagtail.contrib.settings",

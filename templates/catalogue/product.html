@@ -51,6 +51,7 @@
   </div></div>
 </div></section>
 
+{% include "partials/guide_strip.html" %}
 {% if related %}<section class="wrap sec simrail" aria-labelledby="rel-h"><div class="head" style="margin-bottom:0"><h2 id="rel-h">Browse similar products</h2></div>
   <div class="rail-wrap">{% include "partials/arrows.html" with rail="sim" %}<div class="rail" id="sim">{% for r in related %}{% include "partials/card.html" with p=r %}{% endfor %}</div></div>
 </section>{% endif %}

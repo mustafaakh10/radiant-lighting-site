@@ -36,6 +36,7 @@ echo "== Styles and scripts"
 "$VENV/bin/python" manage.py collectstatic --noinput >/dev/null || fail "collectstatic"
 "$VENV/bin/python" manage.py seed_catalogue >/dev/null || true
 "$VENV/bin/python" manage.py seed_projects || true
+"$VENV/bin/python" manage.py seed_guides || true
 "$VENV/bin/python" manage.py seed_rooms || true
 
 write_wsgi

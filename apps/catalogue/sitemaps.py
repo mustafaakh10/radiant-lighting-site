@@ -8,7 +8,7 @@ class StaticSitemap(Sitemap):
     priority = 1.0
 
     def items(self):
-        return ["home", "catalogue:all", "rooms", "projects:list", "about", "contact"]
+        return ["home", "catalogue:all", "rooms", "projects:list", "guides:list", "about", "contact"]
 
     def location(self, item):
         return reverse(item)
@@ -46,4 +46,15 @@ class ProjectSitemap(Sitemap):
         return Project.objects.filter(is_published=True)
 
 
-SITEMAPS = {"projects": ProjectSitemap, "static": StaticSitemap, "categories": CategorySitemap, "spaces": SpaceSitemap, "products": ProductSitemap}
+class GuideSitemap(Sitemap):
+    priority = 0.7
+
+    def items(self):
+        from apps.guides.models import Guide
+        return Guide.objects.filter(is_published=True)
+
+    def lastmod(self, obj):
+        return obj.lastmod
+
+
+SITEMAPS = {"guides": GuideSitemap, "projects": ProjectSitemap, "static": StaticSitemap, "categories": CategorySitemap, "spaces": SpaceSitemap, "products": ProductSitemap}

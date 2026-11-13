@@ -19,6 +19,7 @@ urlpatterns = [
     path("robots.txt", core.robots),
     path("", core.home, name="home"),
     path("projects/", include("apps.projects.urls")),
+    path("guides/", include("apps.guides.urls")),
     path("shop-the-room/", projects_views.rooms, name="rooms"),
     path("about/", projects_views.about, name="about"),
     path("contact/", projects_views.contact, name="contact"),

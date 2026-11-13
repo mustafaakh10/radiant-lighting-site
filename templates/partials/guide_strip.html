@@ -1,0 +1,4 @@
+{% load static %}{% if guides %}<section class="wrap sec g-strip" aria-labelledby="gs-h">
+  <div class="sec-h"><h2 id="gs-h">Helpful guides</h2><a class="tlink" href="{% url 'guides:list' %}">All guides</a></div>
+  <div class="pgrid">{% for g in guides %}{% include "partials/guide_card.html" with h="3" %}{% endfor %}</div>
+</section>{% endif %}

@@ -89,7 +89,7 @@
     <div><span class="logo" style="color:var(--on-dark)"><b>RADIANT</b><span style="color:#9FB3A6">LIGHTING</span></span>
       <p>Architectural LED lighting for homes and commercial projects, from our showroom in Multan.</p></div>
     <div><h4>Products</h4><ul>{% for c in nav_categories %}<li><a href="{{ c.get_absolute_url }}">{{ c.name }}</a></li>{% endfor %}</ul></div>
-    <div><h4>Company</h4><ul><li><a href="{% url 'projects:list' %}">Projects</a></li><li><a href="{% url 'about' %}">About us</a></li><li><a href="{% url 'contact' %}">Contact</a></li></ul></div>
+    <div><h4>Company</h4><ul><li><a href="{% url 'projects:list' %}">Projects</a></li><li><a href="{% url 'guides:list' %}">Guides</a></li><li><a href="{% url 'about' %}">About us</a></li><li><a href="{% url 'contact' %}">Contact</a></li></ul></div>
     <div><h4>Contact</h4><ul><li><a href="https://wa.me/{{ s.whatsapp }}">WhatsApp {{ s.whatsapp_display }}</a></li><li>{{ s.email }}</li><li>{{ s.address|linebreaksbr }}</li><li><a href="{% url 'contact' %}">Send us a message</a></li></ul></div>
   </div>
   <div class="wrap fbase"><span>© {% now "Y" %} Radiant Lighting · Multan</span><span>Delivery across Pakistan</span></div>

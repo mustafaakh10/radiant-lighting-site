@@ -1,0 +1,32 @@
+{% extends "base.html" %}{% load static wagtailimages_tags wagtailcore_tags %}
+{% block title %}{{ guide.title }} · Radiant Lighting{% endblock %}
+{% block description %}{{ guide.description }}{% endblock %}
+{% block og_title %}{{ guide.title }} · Radiant Lighting{% endblock %}
+{% block og_type %}article{% endblock %}
+{% block og_image %}{% if guide.cover %}{% image guide.cover fill-1200x630 format-jpeg as og %}<meta property="og:image" content="{{ site_url }}{{ og.url }}">{% else %}{{ block.super }}{% endif %}{% endblock %}
+{% block head %}<link rel="stylesheet" href="{% static 'css/pages.css' %}"><link rel="stylesheet" href="{% static 'css/guides.css' %}">
+<script type="application/ld+json">{{ jsonld|safe }}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Guides","item":"{{ site_url }}{% url 'guides:list' %}"},{"@type":"ListItem","position":2,"name":"{{ guide.title|escapejs }}"}]}</script>{% endblock %}
+{% block content %}
+<div class="wrap">
+  <nav class="crumb" aria-label="Breadcrumb"><a href="{% url 'home' %}">Home</a><span aria-hidden="true">/</span><a href="{% url 'guides:list' %}">Guides</a><span aria-hidden="true">/</span><span style="color:var(--ink)">{{ guide.title }}</span></nav>
+  <header class="g-art-h">
+    <p class="eyebrow">{{ guide.get_topic_display }}</p>
+    <h1>{{ guide.title }}</h1>
+    <p class="g-lead">{{ guide.summary }}</p>
+    <p class="g-by">By Radiant Lighting · {{ guide.read_minutes }} min read · {% if guide.updated_on %}Updated {{ guide.updated_on|date:"F Y" }}{% else %}{{ guide.published_on|date:"F Y" }}{% endif %}</p>
+  </header>
+</div>
+{% if guide.cover %}<div class="wrap"><div class="g-cover">{% image guide.cover fill-2000x1125 format-webp alt=guide.title %}</div></div>{% endif %}
+<div class="wrap g-body{% if not products %} solo{% endif %}">
+  <article class="g-txt">{{ guide.body|richtext }}</article>
+  {% if products %}<aside class="g-side"><div class="box"><h4>Products in this guide</h4>
+    {% for p in products %}<a class="g-prod" href="{{ p.get_absolute_url }}"><span class="t">{% if p.cutout %}{% image p.cutout max-200x200 format-webp alt="" %}{% endif %}</span><span><b>{{ p.name }}</b><small>{{ p.price_label }}</small></span></a>{% endfor %}
+  </div></aside>{% endif %}
+</div>
+{% if more %}<section class="wrap sec" style="padding-top:64px">
+  <div class="sec-h"><h2>More guides</h2><a class="tlink" href="{% url 'guides:list' %}">All guides</a></div>
+  <div class="pgrid">{% for g in more %}{% include "partials/guide_card.html" with h="3" %}{% endfor %}</div>
+</section>{% endif %}
+{% include "partials/cta_band.html" with cta_title="Want us to work it out for you?" cta_text="Send the room sizes or a photo on WhatsApp and we'll suggest the fittings and a price." %}
+{% endblock %}

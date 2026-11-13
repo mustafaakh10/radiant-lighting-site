@@ -1,0 +1,25 @@
+{% extends "base.html" %}{% load static wagtailimages_tags %}
+{% block title %}Lighting guides · Radiant Lighting{% endblock %}
+{% block description %}Practical lighting advice from Radiant Lighting in Multan: how many lights a room needs, warm vs cool white, and how to choose between downlights, laser blades and track lights.{% endblock %}
+{% block og_title %}Lighting guides · Radiant Lighting{% endblock %}
+{% block head %}<link rel="stylesheet" href="{% static 'css/pages.css' %}"><link rel="stylesheet" href="{% static 'css/guides.css' %}">{% endblock %}
+{% block content %}
+<section class="wrap pg-head">
+  <p class="eyebrow">Guides</p>
+  <h1>Lighting, explained simply.</h1>
+  <p>Practical advice from years of lighting homes and shops in Pakistan: what to buy, how many, and where.</p>
+</section>
+<section class="wrap">
+  {% if topics|length > 1 %}<nav class="chips" aria-label="Topics">
+    <a href="{% url 'guides:list' %}"{% if not topic %} aria-current="page"{% endif %}>All</a>
+    {% for k, label in topics %}<a href="?topic={{ k }}"{% if topic == k %} aria-current="page"{% endif %}>{{ label }}</a>{% endfor %}
+  </nav>{% endif %}
+  {% if featured %}<a class="g-feat" href="{{ featured.get_absolute_url }}">
+    <div class="ph">{% if featured.cover %}{% image featured.cover fill-1400x875 format-webp alt="" %}{% endif %}</div>
+    <div><span class="meta" style="font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--green-ink)">{{ featured.get_topic_display }} · {{ featured.read_minutes }} min read</span>
+      <h2>{{ featured.title }}</h2><p>{{ featured.summary }}</p><span class="g-more">Read the guide</span></div>
+  </a>{% endif %}
+  <div class="pgrid">{% for g in guides %}{% include "partials/guide_card.html" with h="3" %}{% empty %}{% if not featured %}<p class="empty">No guides here yet.</p>{% endif %}{% endfor %}</div>
+</section>
+{% include "partials/cta_band.html" with cta_title="Not sure what you need?" cta_text="Send the room sizes on WhatsApp. We'll suggest the fittings and a price." %}
+{% endblock %}

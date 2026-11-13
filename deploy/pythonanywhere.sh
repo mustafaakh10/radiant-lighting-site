@@ -34,6 +34,7 @@ echo "== Styles and scripts"
 echo "== Catalogue (existing products are kept)"
 "$VENV/bin/python" manage.py seed_catalogue
 "$VENV/bin/python" manage.py seed_projects
+"$VENV/bin/python" manage.py seed_guides
 "$VENV/bin/python" manage.py seed_rooms
 
 echo "== Web app settings"

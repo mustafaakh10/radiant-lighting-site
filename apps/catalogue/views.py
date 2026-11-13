@@ -107,8 +107,12 @@ def catalogue(request, category=None, space=None, preset=None):
     if preset == "new":
         title = "New in"
 
+    guides = []
+    if category:
+        from apps.guides.models import Guide
+        guides = list(Guide.objects.filter(is_published=True, products__product_type__category__slug=category).select_related("cover").distinct()[:3])
     return render(request, "catalogue/catalogue.html", {
-        "title": title, "cells": cells, "count": len(shown), "total": len(products), "filters": filters,
+        "guides": guides, "title": title, "cells": cells, "count": len(shown), "total": len(products), "filters": filters,
         "active": active, "sort": sort, "sorts": SORTS, "action": request.path,
         "path_locked": {"category": category, "space": space, "location": Product.OUTDOOR if preset == "outdoor" else None},
     })
@@ -166,8 +170,13 @@ def product(request, category, slug):
         jsonld["offers"] = {"@type": "AggregateOffer", "priceCurrency": "PKR", "lowPrice": min(offers), "highPrice": max(offers),
                             "offerCount": len(variants), "availability": "https://schema.org/InStock",
                             "url": request.build_absolute_uri(p.get_absolute_url())}
+    from apps.guides.models import Guide
+    gq = Guide.objects.filter(is_published=True).select_related("cover")
+    guides = list(gq.filter(products=p).distinct()[:3])
+    if len(guides) < 3:
+        guides += [g for g in gq.filter(products__product_type__category=p.category).distinct() if g not in guides][: 3 - len(guides)]
     return render(request, "catalogue/product.html", {
-        "p": p, "data": data, "jsonld": json.dumps(jsonld, ensure_ascii=False), "related": related[:8],
+        "guides": guides, "p": p, "data": data, "jsonld": json.dumps(jsonld, ensure_ascii=False), "related": related[:8],
         "first": variants[data["default"]] if variants else None, "pics": pics,
         "wa_trade": wa_link(site.whatsapp, f"Hello Radiant Lighting, I'd like project / trade pricing for {p.name}."),
         "wa_datasheet": wa_link(site.whatsapp, f"Hello Radiant Lighting, please send the datasheet for {p.name}."),

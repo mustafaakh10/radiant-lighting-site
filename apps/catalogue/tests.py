@@ -66,3 +66,29 @@ class SeoTests(TestCase):
         self.assertIn("noindex", self.client.get("/search/?q=x").content.decode())
         with self.settings(SITE_URL="https://radiantlighting.pk"):
             self.assertIn('href="https://radiantlighting.pk/about/"', self.client.get("/about/").content.decode())
+
+
+class GuideTests(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        call_command("seed_catalogue", verbosity=0)
+        call_command("seed_guides", verbosity=0)
+
+    def test_guide_pages_and_links(self):
+        from apps.guides.models import Guide
+        self.assertEqual(self.client.get("/guides/").status_code, 200)
+        self.assertEqual(self.client.get("/guides/?topic=buying").status_code, 200)
+        g = Guide.objects.get(slug="how-many-downlights-per-room")
+        html = self.client.get(g.get_absolute_url()).content.decode()
+        self.assertIn('"@type": "Article"', html)
+        self.assertIn("Products in this guide", html)
+        self.assertIn("/guides/", self.client.get("/").content.decode())
+        self.assertIn("/guides/how-many-downlights-per-room/", self.client.get("/sitemap.xml").content.decode())
+        p = g.products.first()
+        self.assertIn("Helpful guides", self.client.get(p.get_absolute_url()).content.decode())
+        self.assertIn("Helpful guides", self.client.get(p.category.get_absolute_url()).content.decode())
+
+    def test_unpublished_guide_hidden(self):
+        from apps.guides.models import Guide
+        Guide.objects.filter(slug="lighting-a-shop").update(is_published=False)
+        self.assertEqual(self.client.get("/guides/lighting-a-shop/").status_code, 404)
