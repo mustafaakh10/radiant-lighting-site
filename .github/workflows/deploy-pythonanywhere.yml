@@ -1,0 +1,42 @@
+# Updates the PythonAnywhere site whenever the "live" branch changes.
+# Needs one repository secret: DEPLOY_TOKEN (printed by deploy/connect_github.sh on PythonAnywhere).
+name: Deploy to PythonAnywhere
+on:
+  push:
+    branches: [live]
+  workflow_dispatch: {}
+concurrency: deploy
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - run: python manage.py check && python manage.py test
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    env:
+      SITE: https://radiantlighting321.pythonanywhere.com
+    steps:
+      - name: Check the token is set
+        run: |
+          if [ -z "${{ secrets.DEPLOY_TOKEN }}" ]; then echo "::error::Add the DEPLOY_TOKEN secret first (Settings > Secrets and variables > Actions)"; exit 1; fi
+      - name: Start the update
+        run: |
+          code=$(curl -s -o /tmp/out -w "%{http_code}" -X POST -H "X-Deploy-Token: ${{ secrets.DEPLOY_TOKEN }}" "$SITE/_deploy/")
+          cat /tmp/out; echo
+          [ "$code" = "202" ] || { echo "::error::Site answered $code"; exit 1; }
+      - name: Wait for it to finish (up to 6 minutes)
+        run: |
+          for i in $(seq 1 36); do
+            sleep 10
+            log=$(curl -s -H "X-Deploy-Token: ${{ secrets.DEPLOY_TOKEN }}" "$SITE/_deploy/status/" || true)
+            if echo "$log" | grep -q "DEPLOY OK"; then echo "$log"; exit 0; fi
+            if echo "$log" | grep -q "DEPLOY FAILED"; then echo "$log"; exit 1; fi
+          done
+          echo "$log"; echo "::warning::No result after 6 minutes. Check the site, or run deploy/update.sh in a PythonAnywhere console."

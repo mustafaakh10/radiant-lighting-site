@@ -27,10 +27,10 @@
     <a class="logo" href="{% url 'home' %}" aria-label="Radiant Lighting, home"><b>RADIANT</b><span>LIGHTING</span></a>
     <nav class="nav" aria-label="Main">
       <button id="megaBtn" aria-expanded="false" aria-controls="mega"{% if nav == "products" %} aria-current="page"{% endif %}>Products</button>
-      <a href="{% url 'catalogue:space' 'homes' %}"{% if nav == "residential" %} aria-current="page"{% endif %}>Residential</a>
-      <a href="{% url 'home' %}#projects">Commercial</a>
-      <a href="{% url 'home' %}#about">About</a>
-      <a href="{% url 'home' %}#contact">Contact</a>
+      <a href="{% url 'rooms' %}"{% if nav == "rooms" %} aria-current="page"{% endif %}>Shop the room</a>
+      <a href="{% url 'projects:list' %}"{% if nav == "projects" %} aria-current="page"{% endif %}>Projects</a>
+      <a href="{% url 'about' %}"{% if nav == "about" %} aria-current="page"{% endif %}>About</a>
+      <a href="{% url 'contact' %}"{% if nav == "contact" %} aria-current="page"{% endif %}>Contact</a>
     </nav>
     <div class="hdr-r">
       <button class="search-txt" id="searchBtn" aria-expanded="false" aria-controls="search"><span>Search</span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></button>
@@ -59,11 +59,22 @@
     <span class="logo"><b>RADIANT</b><span>LIGHTING</span></span>
     <button class="ico" id="closeBtn" aria-label="Close menu"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
   </div>
-  <h4>Products</h4>
-  <nav aria-label="Product categories">{% for c in nav_categories %}<a href="{{ c.get_absolute_url }}">{{ c.name }}</a>{% endfor %}<a href="{% url 'catalogue:all' %}">All products</a></nav>
-  <h4>Explore</h4>
-  <nav aria-label="Pages"><a href="{% url 'catalogue:space' 'homes' %}">Residential</a><a href="{% url 'home' %}#projects">Commercial</a><a href="{% url 'home' %}#about">About</a><a href="{% url 'home' %}#contact">Showroom &amp; contact</a></nav>
-  <a class="btn primary" href="https://wa.me/{{ s.whatsapp }}">Chat on WhatsApp · {{ s.whatsapp_display }}</a>
+  <div class="dpanel" data-panel="main">
+    <nav class="dmain" aria-label="Menu">
+      <button type="button" data-open="products">Products<i aria-hidden="true"></i></button>
+      <a href="{% url 'rooms' %}">Shop the room</a>
+      <a href="{% url 'projects:list' %}">Projects</a>
+      <a href="{% url 'about' %}">About</a>
+      <a href="{% url 'contact' %}">Contact</a>
+    </nav>
+    <a class="btn primary" href="https://wa.me/{{ s.whatsapp }}">Chat on WhatsApp · {{ s.whatsapp_display }}</a>
+  </div>
+  <div class="dpanel" data-panel="products" hidden>
+    <div class="dhead"><button type="button" data-back aria-label="Back to menu"><i aria-hidden="true"></i></button><span>Products</span></div>
+    <section><h4>Location</h4><a href="{% url 'catalogue:all' %}?location=indoor">Indoor</a><a href="{% url 'catalogue:outdoor' %}">Outdoor</a><a class="more" href="{% url 'catalogue:new' %}">New in</a></section>
+    <section><h4>Category</h4>{% for c in nav_categories %}<a href="{{ c.get_absolute_url }}">{{ c.name }}</a>{% endfor %}<a class="more" href="{% url 'catalogue:all' %}">View all</a></section>
+    <section><h4>Application</h4>{% for a in nav_spaces %}<a href="{{ a.get_absolute_url }}">{{ a.name }}</a>{% endfor %}</section>
+  </div>
 </div>
 
 <main id="main">{% block content %}{% endblock %}</main>
@@ -73,8 +84,8 @@
     <div><span class="logo" style="color:var(--on-dark)"><b>RADIANT</b><span style="color:#9FB3A6">LIGHTING</span></span>
       <p>Architectural LED lighting for homes and commercial projects, from our showroom in Multan.</p></div>
     <div><h4>Products</h4><ul>{% for c in nav_categories %}<li><a href="{{ c.get_absolute_url }}">{{ c.name }}</a></li>{% endfor %}</ul></div>
-    <div><h4>Spaces</h4><ul>{% for a in nav_spaces %}<li><a href="{{ a.get_absolute_url }}">{{ a.name }}</a></li>{% endfor %}</ul></div>
-    <div><h4>Contact</h4><ul><li><a href="https://wa.me/{{ s.whatsapp }}">WhatsApp {{ s.whatsapp_display }}</a></li><li>{{ s.email }}</li><li>{{ s.address|linebreaksbr }}</li><li><a href="{% url 'home' %}#projects">Lighting a project?</a></li></ul></div>
+    <div><h4>Company</h4><ul><li><a href="{% url 'projects:list' %}">Projects</a></li><li><a href="{% url 'about' %}">About us</a></li><li><a href="{% url 'contact' %}">Contact</a></li></ul></div>
+    <div><h4>Contact</h4><ul><li><a href="https://wa.me/{{ s.whatsapp }}">WhatsApp {{ s.whatsapp_display }}</a></li><li>{{ s.email }}</li><li>{{ s.address|linebreaksbr }}</li><li><a href="{% url 'contact' %}">Send us a message</a></li></ul></div>
   </div>
   <div class="wrap fbase"><span>© {% now "Y" %} Radiant Lighting · Multan</span><span>Delivery across Pakistan</span></div>
 </footer>

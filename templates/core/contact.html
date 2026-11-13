@@ -1,0 +1,42 @@
+{% extends "base.html" %}{% load static %}
+{% block title %}Contact · Radiant Lighting{% endblock %}
+{% block description %}Contact Radiant Lighting in Multan on WhatsApp, phone or email, or visit our showroom on LMQ Road.{% endblock %}
+{% block head %}<link rel="stylesheet" href="{% static 'css/pages.css' %}">{% endblock %}
+{% block content %}
+<section class="wrap pg-head">
+  <p class="eyebrow">Contact</p>
+  <h1>Talk to us.</h1>
+  <p>WhatsApp is quickest. Send a photo of the room or a plan and we'll suggest the lights.</p>
+</section>
+<section class="wrap ct">
+  <div>
+    <div class="ways-ct">
+      <a href="https://wa.me/{{ site.whatsapp }}"><span>WhatsApp</span><b>{{ site.whatsapp_display }}</b></a>
+      <a href="tel:+{{ site.whatsapp }}"><span>Call</span><b>{{ site.whatsapp_display }}</b></a>
+      <a href="mailto:{{ site.email }}"><span>Email</span><b>{{ site.email }}</b></a>
+      <div><span>Showroom</span><b>{{ site.address|linebreaksbr }}</b></div>
+    </div>
+    <a class="btn primary" href="https://wa.me/{{ site.whatsapp }}?text={{ 'Hello Radiant Lighting'|urlencode }}">Chat on WhatsApp</a>
+    <div class="hours">
+      <h2>Opening hours</h2>
+      <dl><dt>Mon – Sat</dt><dd>11:00 am – 8:00 pm</dd><dt>Sunday</dt><dd>Closed</dd></dl>
+      <p class="muted" style="font-size:13px;margin-top:8px">Placeholder hours: replace with your real ones.</p>
+    </div>
+    <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query={{ site.maps_query|urlencode }}" target="_blank" rel="noopener">
+      <img src="{% static 'img/home/showroom-m.webp' %}" alt="" loading="lazy"><span>Get directions →</span></a>
+  </div>
+  <form method="post" action="{% url 'contact' %}" novalidate>
+    {% csrf_token %}
+    <h2>Send us a message</h2>
+    {% for m in messages %}<p class="flash" role="status">{{ m }}</p>{% endfor %}
+    {{ form.website }}
+    {% for f in form.visible_fields %}<div class="field">
+      <label for="{{ f.id_for_label }}">{{ f.label }}{% if not f.field.required %} <span class="muted">(optional)</span>{% endif %}</label>
+      {{ f }}{% for e in f.errors %}<span class="err">{{ e }}</span>{% endfor %}
+    </div>{% endfor %}
+    <button class="btn primary" type="submit" style="width:100%">Send message</button>
+    <p class="note">We'll reply on WhatsApp or by phone, usually within a working day.</p>
+  </form>
+</section>
+{% include "partials/cta_band.html" with cta_title="Prefer to see it in person?" cta_text="Visit the showroom and see every colour temperature side by side before you buy." %}
+{% endblock %}

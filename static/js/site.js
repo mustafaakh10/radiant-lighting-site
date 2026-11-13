@@ -34,8 +34,14 @@
   });
   q && q.addEventListener("input", () => { clearTimeout(sTimer); sTimer = setTimeout(suggest, 180); });
   menuBtn && menuBtn.addEventListener("click", () => { closeAll(); drawer.hidden = false; menuBtn.setAttribute("aria-expanded", "true"); $("#closeBtn").focus(); });
-  $("#closeBtn") && $("#closeBtn").addEventListener("click", () => { drawer.hidden = true; menuBtn.setAttribute("aria-expanded", "false"); menuBtn.focus(); });
-  drawer && drawer.addEventListener("click", (e) => { if (e.target.closest("a")) { drawer.hidden = true; menuBtn.setAttribute("aria-expanded", "false"); } });
+  $("#closeBtn") && $("#closeBtn").addEventListener("click", () => { drawer.hidden = true; panel("main"); menuBtn.setAttribute("aria-expanded", "false"); menuBtn.focus(); });
+  const panel = (name) => { $$(".dpanel", drawer).forEach((p) => p.hidden = p.dataset.panel !== name); drawer.scrollTop = 0; };
+  drawer && drawer.addEventListener("click", (e) => {
+    const open = e.target.closest("[data-open]"), back = e.target.closest("[data-back]");
+    if (open) { panel(open.dataset.open); const b = $(`[data-panel="${open.dataset.open}"] [data-back]`, drawer); b && b.focus(); return; }
+    if (back) { const from = back.closest(".dpanel").dataset.panel; panel("main"); const o = $(`[data-open="${from}"]`, drawer); o && o.focus(); return; }
+    if (e.target.closest("a")) { drawer.hidden = true; panel("main"); menuBtn.setAttribute("aria-expanded", "false"); }
+  });
   document.addEventListener("keydown", (e) => {
     if (e.key !== "Escape") return;
     const wasMega = mega && !mega.hidden; closeAll();

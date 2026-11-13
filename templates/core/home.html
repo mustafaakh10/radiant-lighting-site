@@ -46,11 +46,18 @@
   </div>
 </section>
 
-<section class="h-ways h-dark" aria-label="Start here">
+<section class="h-work h-dark" id="work" aria-labelledby="work-h">
   <div class="h-wrap">
-    <a href="{% url 'catalogue:space' 'homes' %}"><b>Homes</b><span>Living rooms, kitchens, bedrooms</span></a>
-    <a href="#projects"><b>Commercial spaces</b><span>Offices, shops, restaurants</span></a>
-    <a href="{% url 'catalogue:outdoor' %}"><b>Outdoor</b><span>Facades, steps and gardens</span></a>
+    <div class="h-work-txt">
+      <p class="h-eyebrow">Our projects</p>
+      <h2 id="work-h">Spaces we've brought to life.</h2>
+      <p class="h-work-lede">Homes, offices and shops across Pakistan, lit by Radiant.</p>
+      <a class="h-tlink" href="{% url 'projects:list' %}">View projects</a>
+    </div>
+    <div class="h-work-strip">
+      {% for p in work_projects %}<a class="h-tile" href="{{ p.get_absolute_url }}">{% if p.cover %}{% image p.cover fill-600x800 format-webp loading="lazy" alt=p.title %}{% endif %}<span>{{ p.get_kind_display }}</span></a>
+      {% endfor %}
+    </div>
   </div>
 </section>
 
@@ -103,7 +110,18 @@
       <img src="{% static 'img/home/coll-cob.webp' %}" alt="A black recessed COB downlight in a dark ceiling, throwing warm light down a wall" loading="lazy" decoding="async" style="object-position:70% 42%">
     </picture>
   </div>
-  <div class="h-coll-pick h-slot" data-need="Product photo"></div>
+  <div class="h-coll-pick" data-pick role="group" aria-roledescription="carousel" aria-label="COB spots">
+    <button class="h-arrow h-prev" type="button" aria-label="Previous product"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+    <div class="h-pane">
+      <img class="on" src="{% static 'img/home/cob-tulip.webp' %}" alt="Tulip Gen-2 white recessed COB spot" data-name="Tulip Gen-2" data-spec="COB spotlight · 5–18W" data-tone="dark" loading="lazy" decoding="async">
+      <img src="{% static 'img/home/cob-opple.webp' %}" alt="OPPLE 3.5 inch recessed COB downlight" data-name="OPPLE 3.5″" data-spec="Recessed COB · anti-glare" data-tone="light" loading="lazy" decoding="async">
+      <img src="{% static 'img/home/cob-mini.webp' %}" alt="Mini COB 1 inch miniature spotlight" data-name="Mini COB 1″" data-spec="Miniature spotlight · 2W" data-tone="light" loading="lazy" decoding="async">
+    </div>
+    <button class="h-arrow h-next" type="button" aria-label="Next product"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+    <h3 aria-live="polite">Tulip Gen-2</h3>
+    <small>COB spotlight · 5–18W</small>
+    <div class="h-ticks" role="tablist" aria-label="Choose product"><i class="on"></i><i></i><i></i></div>
+  </div>
 </section>
 
 <section class="h-coll h-dark" aria-labelledby="blade-h">
@@ -113,8 +131,24 @@
       <p>Recessed blades from one head to fifteen, CRI above 90, for ceilings that should look like nothing is there.</p>
       <a class="h-btn h-ghost" href="{{ link_blade }}">Explore laser blades</a>
     </div>
-  <div class="h-coll-shot h-slot" data-need="One recessed line across a ceiling"></div>
-  <div class="h-coll-pick h-slot" data-need="Product photo"></div>
+  <div class="h-coll-shot">
+    <picture>
+      <source media="(max-width:700px)" srcset="{% static 'img/home/coll-blade-m.webp' %}">
+      <img src="{% static 'img/home/coll-blade.webp' %}" alt="Slim recessed linear spots in a warm ceiling, with a soft cove of light over a slatted wall" loading="lazy" decoding="async" style="object-position:60% 20%">
+    </picture>
+  </div>
+  <div class="h-coll-pick light" data-pick role="group" aria-roledescription="carousel" aria-label="Laser blades">
+    <button class="h-arrow h-prev" type="button" aria-label="Previous product"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+    <div class="h-pane">
+      <img class="on" src="{% static 'img/home/blade-linea.webp' %}" alt="Linea black recessed laser blade with three heads" data-name="Linea" data-spec="Laser blade · 1–15 heads" data-tone="light" loading="lazy" decoding="async">
+      <img src="{% static 'img/home/blade-rayzen-linear.webp' %}" alt="Rayzen Linear white recessed laser blade" data-name="Rayzen Linear" data-spec="Laser blade · 3–30W · CRI >90" data-tone="light" loading="lazy" decoding="async">
+      <img src="{% static 'img/home/blade-rayzen-square.webp' %}" alt="Rayzen Square recessed grille with four heads" data-name="Rayzen Square" data-spec="Square grille · 8–32W · CRI >90" data-tone="light" loading="lazy" decoding="async">
+    </div>
+    <button class="h-arrow h-next" type="button" aria-label="Next product"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+    <h3 aria-live="polite">Linea</h3>
+    <small>Laser blade · 1–15 heads</small>
+    <div class="h-ticks" role="tablist" aria-label="Choose product"><i class="on"></i><i></i><i></i></div>
+  </div>
 </section>
 
 <section class="h-coll h-dark" aria-labelledby="track-h">
@@ -124,8 +158,23 @@
       <p>Spotlights on a one-metre rail, so a shop, gallery or showroom can move its light whenever the display changes.</p>
       <a class="h-btn h-ghost" href="{{ link_track }}">Explore track lights</a>
     </div>
-  <div class="h-coll-shot h-slot" data-need="Track spots aimed at a shop wall"></div>
-  <div class="h-coll-pick h-slot" data-need="Product photo"></div>
+  <div class="h-coll-shot">
+    <picture>
+      <source media="(max-width:700px)" srcset="{% static 'img/home/coll-track-m.webp' %}">
+      <img src="{% static 'img/home/coll-track.webp' %}" alt="Three black track spots on a rail washing scallops of light down a living room wall" loading="lazy" decoding="async" style="object-position:50% 12%">
+    </picture>
+  </div>
+  <div class="h-coll-pick light" data-pick role="group" aria-roledescription="carousel" aria-label="Track lights">
+    <button class="h-arrow h-prev" type="button" aria-label="Previous product"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+    <div class="h-pane">
+      <img class="on" src="{% static 'img/home/track-decor.webp' %}" alt="Decor Series black track spotlight with a warm COB lamp" data-name="Decor Series" data-spec="Track spotlight · 10 / 20W · CRI >90" data-tone="light" loading="lazy" decoding="async">
+      <img src="{% static 'img/home/track-rail.webp' %}" alt="Aluminium track rail in black and white" data-name="Aluminium Track" data-spec="Track rail · 1 metre" data-tone="light" data-rgba loading="lazy" decoding="async">
+    </div>
+    <button class="h-arrow h-next" type="button" aria-label="Next product"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+    <h3 aria-live="polite">Decor Series</h3>
+    <small>Track spotlight · 10 / 20W · CRI >90</small>
+    <div class="h-ticks" role="tablist" aria-label="Choose product"><i class="on"></i><i></i></div>
+  </div>
 </section>
 
 <section class="h-sec" id="spaces" aria-labelledby="spaces-h" style="padding-top:0">
@@ -163,7 +212,10 @@
       <p class="h-fine">WhatsApp {{ site.whatsapp_display }} · {{ site.email }}</p>
       <div class="h-row"><a class="h-tlink" href="https://wa.me/{{ site.whatsapp }}">WhatsApp us</a><a class="h-tlink" href="https://www.google.com/maps/search/?api=1&amp;query={{ site.maps_query|urlencode }}">Get directions</a></div>
     </div>
-    {% if site.showroom_image %}<div class="h-showpic h-rv">{% image site.showroom_image fill-1600x1100 format-webp alt="Radiant Lighting showroom" loading="lazy" %}</div>{% else %}<div class="h-glow h-rv" aria-hidden="true"></div>{% endif %}
+    {% if site.showroom_image %}<div class="h-showpic h-rv">{% image site.showroom_image fill-1600x1100 format-webp alt="Radiant Lighting showroom" loading="lazy" %}</div>{% else %}<div class="h-pic h-rv"><picture>
+      <source media="(max-width:700px)" srcset="{% static 'img/home/showroom-m.webp' %}">
+      <img src="{% static 'img/home/showroom.webp' %}" alt="The building that houses the Radiant Lighting showroom in Multan" loading="lazy" decoding="async">
+    </picture></div>{% endif %}
   </div>
 </section>
 </div>
@@ -242,4 +294,29 @@ roomBtns.forEach((b) => b.addEventListener("click", () => {
   roomCap.textContent = views.find((v) => v.dataset.room === want).dataset.cap;
 }));
 presets.forEach((b) => b.addEventListener("click", () => setK(b.dataset.k)));
+
+// COB product slider: arrows, swipe/drag, ticks, keyboard.
+document.querySelectorAll("[data-pick]").forEach((box) => {
+  const imgs = [...box.querySelectorAll(".h-pane img")], ticks = [...box.querySelectorAll(".h-ticks i")];
+  const h3 = box.querySelector("h3"), sm = box.querySelector("small");
+  let n = 0;
+  function go(to) {
+    const prev = n; n = (to + imgs.length) % imgs.length;
+    if (prev === n) return;
+    imgs[prev].classList.remove("on"); imgs[prev].classList.add("out");
+    const gone = imgs[prev]; setTimeout(() => gone.classList.remove("out"), 600);
+    imgs[n].classList.add("on");
+    ticks.forEach((t, i) => t.classList.toggle("on", i === n));
+    h3.textContent = imgs[n].dataset.name; sm.textContent = imgs[n].dataset.spec;
+    box.classList.toggle("light", imgs[n].dataset.tone === "light");
+  }
+  box.querySelector(".h-prev").addEventListener("click", () => go(n - 1));
+  box.querySelector(".h-next").addEventListener("click", () => go(n + 1));
+  ticks.forEach((t, i) => t.addEventListener("click", () => go(i)));
+  let x0 = null;
+  box.addEventListener("pointerdown", (e) => { if (!e.target.closest(".h-arrow")) x0 = e.clientX; });
+  addEventListener("pointerup", (e) => { if (x0 === null) return; const dx = e.clientX - x0; x0 = null; if (Math.abs(dx) > 40) go(n + (dx < 0 ? 1 : -1)); });
+  box.tabIndex = 0;
+  box.addEventListener("keydown", (e) => { if (e.key === "ArrowRight") go(n + 1); if (e.key === "ArrowLeft") go(n - 1); });
+});
 </script>{% endblock %}

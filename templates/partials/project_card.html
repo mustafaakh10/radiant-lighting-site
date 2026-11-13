@@ -1,0 +1,6 @@
+{% load wagtailimages_tags %}<a class="pcard" href="{{ p.get_absolute_url }}">
+  <div class="ph">{% if p.cover %}{% image p.cover fill-900x675 format-webp loading="lazy" alt=p.title %}{% endif %}</div>
+  <span class="meta">{{ p.get_kind_display }} · {{ p.city }}{% if p.year %} · {{ p.year }}{% endif %}</span>
+  <h{{ h|default:"2" }}>{{ p.title }}</h{{ h|default:"2" }}>
+  <p>{{ p.summary }}</p>
+</a>

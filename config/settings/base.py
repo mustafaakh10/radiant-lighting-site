@@ -21,6 +21,7 @@ CSRF_TRUSTED_ORIGINS = [o.strip() for o in env("DJANGO_CSRF_TRUSTED_ORIGINS", ""
 INSTALLED_APPS = [
     "apps.core",
     "apps.catalogue",
+    "apps.projects",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
     "wagtail.contrib.settings",
@@ -47,6 +48,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "apps.core.middleware.NoIndexMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -110,6 +112,8 @@ STATICFILES_DIRS = [BASE_DIR / "static"]
 MEDIA_URL = "/media/"
 MEDIA_ROOT = Path(env("DJANGO_MEDIA_ROOT", BASE_DIR / "media"))
 SERVE_MEDIA = env_bool("DJANGO_SERVE_MEDIA", False)
+SITE_NOINDEX = env_bool("DJANGO_SITE_NOINDEX", False)   # test copies: keep out of Google
+DEPLOY_TOKEN = env("DJANGO_DEPLOY_TOKEN", "")            # empty = deploy hook switched off
 STORAGES = {
     "default": {"BACKEND": "django.core.files.storage.FileSystemStorage"},
     "staticfiles": {"BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage"},

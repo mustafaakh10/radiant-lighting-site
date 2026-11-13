@@ -1,0 +1,21 @@
+{% extends "base.html" %}{% load static %}
+{% block title %}Projects · Radiant Lighting{% endblock %}
+{% block description %}Homes, offices and shops lit by Radiant Lighting in Multan and across Pakistan.{% endblock %}
+{% block head %}<link rel="stylesheet" href="{% static 'css/pages.css' %}">{% endblock %}
+{% block content %}
+<section class="wrap pg-head">
+  <p class="eyebrow">Our projects</p>
+  <h1>Spaces we've brought to life.</h1>
+  <p>Homes, offices and shops across Pakistan, lit with fittings from our range.</p>
+</section>
+<section class="wrap">
+  {% if kinds|length > 1 %}<nav class="chips" aria-label="Filter projects">
+    <a href="{% url 'projects:list' %}"{% if not kind %} aria-current="page"{% endif %}>All</a>
+    {% for k, label in kinds %}<a href="?type={{ k }}"{% if kind == k %} aria-current="page"{% endif %}>{{ label }}</a>{% endfor %}
+  </nav>{% endif %}
+  <div class="pgrid">
+    {% for p in projects %}{% include "partials/project_card.html" %}{% empty %}<p class="empty">No projects here yet.</p>{% endfor %}
+  </div>
+</section>
+{% include "partials/cta_band.html" %}
+{% endblock %}

@@ -7,6 +7,8 @@ from django.urls import reverse
 from apps.catalogue.models import Application, Category
 from apps.catalogue.views import published
 
+from apps.projects.models import Project
+
 from .models import SiteContent
 
 
@@ -48,6 +50,7 @@ def home(request):
         "link_cob": by_slug.get("downlights", all_url), "link_track": by_slug.get("track-lights", all_url),
         "link_blade": reverse("catalogue:search") + "?q=laser+blade",
         "wa_project": f"https://wa.me/{site.whatsapp}?text=" + quote("Hello Radiant Lighting, I need lighting for a space."),
+        "work_projects": Project.objects.filter(is_published=True, featured=True).select_related("cover")[:3],
         "site": site, "slides": site.slides.select_related("image"), "spaces": spaces,
         "categories": categories, "feature_cards": feature_cards[:8], "range_total": len(products),
         "wa_trade": f"https://wa.me/{site.whatsapp}?text=" + quote("Hello Radiant Lighting, I'd like trade pricing for a project. I can share the BOQ / drawings."),

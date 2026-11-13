@@ -1,0 +1,35 @@
+{% extends "base.html" %}{% load static %}
+{% block title %}About · Radiant Lighting{% endblock %}
+{% block description %}Radiant Lighting: architectural LED lighting from Multan, supplying homes and businesses across Pakistan.{% endblock %}
+{% block head %}<link rel="stylesheet" href="{% static 'css/pages.css' %}">{% endblock %}
+{% block content %}
+<section class="wrap pg-head">
+  <p class="eyebrow">About us</p>
+  <h1>Good light, from one shop in Multan.</h1>
+  <p>We help homes, offices and shops choose lighting that looks right and lasts, and we stand behind every fitting we sell.</p>
+</section>
+<div class="wrap"><div class="ab-img"><img src="{% static 'img/home/hero2.webp' %}" alt="An office lobby lit by Radiant Lighting" loading="lazy"></div></div>
+<section class="wrap story">
+  <h2>Fifteen years of lighting Pakistan's homes and businesses.</h2>
+  <div>
+    <p>Radiant Lighting started as a small lighting supplier in Multan. Over the years we've lit family homes, offices, shops and restaurants, and learned what works in Pakistani homes and climates.</p>
+    <p>Today we carry our own range of downlights, laser blades, track lights, strip lights and profiles, alongside trusted brands. Every product is one we'd put in our own home.</p>
+    <p>Placeholder text: replace with your real story, who runs the business and when it started.</p>
+  </div>
+</section>
+<div class="wrap"><div class="stats">
+  <div><b>15+</b><span>Years in lighting</span></div>
+  <div><b>{{ range_total|default:"23" }}</b><span>Product ranges</span></div>
+  <div><b>PK</b><span>Delivery nationwide</span></div>
+</div></div>
+<section class="wrap"><div class="values">
+  <div><b>Honest colour</b><p>We tell you the real colour temperature and CRI, so the light looks the way you expect.</p></div>
+  <div><b>Advice before you buy</b><p>Send us a photo or a plan and we'll suggest the right fittings, free.</p></div>
+  <div><b>Backed after sale</b><p>Warranty on our range, and a real showroom you can walk into.</p></div>
+</div></section>
+{% if projects %}<section class="wrap sec" style="padding-top:80px">
+  <div class="sec-h"><h2>Recent projects</h2><a class="tlink" href="{% url 'projects:list' %}">View all</a></div>
+  <div class="pgrid">{% for p in projects %}{% include "partials/project_card.html" with h="3" %}{% endfor %}</div>
+</section>{% endif %}
+{% include "partials/cta_band.html" %}
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends "base.html" %}{% load static wagtailimages_tags %}
+{% block title %}{{ project.title }} · Projects · Radiant Lighting{% endblock %}
+{% block description %}{{ project.summary }}{% endblock %}
+{% block head %}<link rel="stylesheet" href="{% static 'css/pages.css' %}">{% endblock %}
+{% block content %}
+<section class="wrap pg-head">
+  <nav class="crumb" aria-label="Breadcrumb" style="padding-top:0;margin-bottom:14px"><a href="{% url 'home' %}">Home</a><span aria-hidden="true">/</span><a href="{% url 'projects:list' %}">Projects</a></nav>
+  <p class="eyebrow">{{ project.get_kind_display }} · {{ project.city }}</p>
+  <h1>{{ project.title }}</h1>
+  <p>{{ project.summary }}</p>
+</section>
+{% if project.cover %}<div class="p-hero">{% image project.cover fill-2000x1125 format-webp alt=project.title %}</div>{% endif %}
+<section class="wrap p-body">
+  <div class="txt">{% for para in project.paragraphs %}<p>{{ para }}</p>{% endfor %}</div>
+  <div class="pfacts">
+    <div><span>Type</span><b>{{ project.get_kind_display }}</b></div>
+    <div><span>City</span><b>{{ project.city }}</b></div>
+    <div><span>Year</span><b>{{ project.year|default:"—" }}</b></div>
+  </div>
+</section>
+{% if photos %}<section class="wrap sec" style="padding-top:56px">
+  <div class="sec-h"><h2>Gallery</h2></div>
+  <div class="gallery">{% for ph in photos %}<figure>{% image ph.image fill-1200x900 format-webp loading="lazy" alt=ph.caption|default:project.title %}{% if ph.caption %}<figcaption>{{ ph.caption }}</figcaption>{% endif %}</figure>{% endfor %}</div>
+</section>{% endif %}
+{% if products %}<section class="wrap sec used" style="padding-top:64px">
+  <div class="sec-h"><h2>Lights used here</h2><a class="tlink" href="{% url 'catalogue:all' %}">All products</a></div>
+  <div class="grid4">{% for p in products %}{% include "partials/card.html" %}{% endfor %}</div>
+</section>{% endif %}
+{% if more %}<section class="wrap sec" style="padding-top:72px">
+  <div class="sec-h"><h2>More projects</h2><a class="tlink" href="{% url 'projects:list' %}">View all</a></div>
+  <div class="pgrid">{% for p in more %}{% include "partials/project_card.html" with h="3" %}{% endfor %}</div>
+</section>{% endif %}
+{% include "partials/cta_band.html" %}
+{% endblock %}
