@@ -20,5 +20,10 @@ urlpatterns = [
 if settings.DEBUG:
     from django.conf.urls.static import static
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+elif settings.SERVE_MEDIA:
+    # Test hosts with no web server in front (e.g. PythonAnywhere free) let Django serve uploads.
+    from django.urls import re_path
+    from django.views.static import serve
+    urlpatterns += [re_path(r"^media/(?P<path>.*)$", serve, {"document_root": settings.MEDIA_ROOT})]
 
 urlpatterns += [path("pages/", include(wagtail_urls))]
