@@ -1,72 +1,245 @@
-{% extends "base.html" %}{% load wagtailimages_tags humanize %}
+{% extends "base.html" %}{% load wagtailimages_tags static %}
 {% block body_class %}home{% endblock %}
 {% block og_title %}Radiant Lighting · Architectural LED lighting, Multan{% endblock %}
-{% block head %}<script type="application/ld+json">{"@context":"https://schema.org","@type":"Store","name":"Radiant Lighting","telephone":"+{{ site.whatsapp }}","email":"{{ site.email }}","address":{"@type":"PostalAddress","streetAddress":"{{ site.address|linebreaksbr|striptags|escapejs }}","addressLocality":"Multan","addressCountry":"PK"},"url":"{{ request.build_absolute_uri }}"}</script>{% endblock %}
+{% block head %}<link rel="stylesheet" href="{% static 'css/home.css' %}">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Store","name":"Radiant Lighting","telephone":"+{{ site.whatsapp }}","email":"{{ site.email }}","address":{"@type":"PostalAddress","streetAddress":"{{ site.address|linebreaksbr|striptags|escapejs }}","addressLocality":"Multan","addressCountry":"PK"},"url":"{{ request.build_absolute_uri }}"}</script>{% endblock %}
 {% block content %}
-<section class="hero" aria-roledescription="carousel" aria-label="Featured">
-  {% for s in slides %}
-  <div class="slide{% if forloop.first %} on{% endif %}{% if s.fallback == 'studio' %} slide-3{% endif %}" aria-hidden="{% if forloop.first %}false{% else %}true{% endif %}">
-    <div class="slot{% if s.image %} has-photo{% endif %}">
-      {% if s.image %}<picture>{% if s.mobile_image %}{% image s.mobile_image fill-900x1350 format-webp as mob %}<source media="(max-width: 700px)" srcset="{{ mob.url }}">{% endif %}{% image s.image fill-2400x1100 format-webp class="photo" alt="" %}</picture>
-      {% elif s.fallback == "studio" %}<div class="fb fb-hero3">{% if site.feature_link.cutout %}{% image site.feature_link.cutout max-900x600 format-webp alt="" %}{% endif %}</div>
-      {% elif s.fallback == "cool" %}<div class="fb fb-hero2"></div>{% else %}<div class="fb fb-hero1"></div>{% endif %}
-      <div class="ov"></div>
+<div class="hp">
+<section class="h-hero h-dark" aria-roledescription="carousel" aria-label="Featured">
+  <article class="h-slide on" aria-labelledby="hero-h1">
+    <div class="h-shot">
+      <picture>
+        <source media="(max-width:700px)" srcset="{% static 'img/home/hero-m.webp' %}">
+        <img src="{% static 'img/home/hero.webp' %}" alt="A living room at night lit by three recessed downlights washing the wall" fetchpriority="high" width="1600" height="941">
+      </picture>
+      <div class="h-grain" aria-hidden="true"></div>
     </div>
-    <div class="txt"><div class="wrap"><h2>{{ s.title|linebreaksbr }}</h2><a class="tlink" href="{{ s.link_url }}"{% if not forloop.first %} tabindex="-1"{% endif %}>{{ s.link_text }}</a></div></div>
+    <div class="h-veil" aria-hidden="true"></div>
+    <div class="h-txt"><div class="h-wrap">
+      <span class="h-eyebrow">Architectural lighting &middot; Multan</span>
+      <h1 id="hero-h1">The right light for every room.</h1>
+      <p class="h-lede">Downlights, linear, track and outdoor lighting for homes across Pakistan.</p>
+      <div class="h-cta"><a class="h-btn" href="{% url 'catalogue:all' %}">Explore the range</a><a class="h-tlink" href="#spaces">Shop by space</a></div>
+    </div></div>
+  </article>
+
+  <article class="h-slide" aria-labelledby="hero-h2" aria-hidden="true">
+    <div class="h-shot">
+      <picture>
+        <source media="(max-width:700px)" srcset="{% static 'img/home/hero2-m.webp' %}">
+        <img src="{% static 'img/home/hero2.webp' %}" alt="An office lobby at dusk lit by linear pendants, wall washers and a lit reception desk" loading="lazy" decoding="async" width="1600" height="942">
+      </picture>
+      <div class="h-grain" aria-hidden="true"></div>
+    </div>
+    <div class="h-veil" aria-hidden="true"></div>
+    <div class="h-txt"><div class="h-wrap">
+      <span class="h-eyebrow">Shops, offices &amp; restaurants</span>
+      <h1 id="hero-h2">Lighting for commercial spaces.</h1>
+      <p class="h-lede">Offices, retail, hotels and restaurants, lit from one shop in Multan.</p>
+      <div class="h-cta"><a class="h-btn" href="#projects" tabindex="-1">Lighting a project?</a><a class="h-tlink" href="{% url 'catalogue:all' %}" tabindex="-1">See the range</a></div>
+    </div></div>
+  </article>
+
+  <div class="h-dots" role="group" aria-label="Choose slide">
+    <button type="button" data-i="0" aria-current="true" aria-label="Homes"><i></i></button>
+    <button type="button" data-i="1" aria-current="false" aria-label="Commercial spaces"><i></i></button>
   </div>
-  {% endfor %}
-  {% if slides|length > 1 %}<div class="dots" role="group" aria-label="Choose slide">{% for s in slides %}<button data-slide="{{ forloop.counter0 }}" aria-label="Slide {{ forloop.counter }}" aria-current="{% if forloop.first %}true{% else %}false{% endif %}"><i></i></button>{% endfor %}</div>{% endif %}
 </section>
 
-<section class="wrap sec">
-  <div class="intro">
-    <div><h1 style="font-size:clamp(30px,3vw,40px);line-height:1.15">{{ site.intro_title }}</h1><p>{{ site.intro_text }}</p><a class="tlink" href="{% url 'catalogue:all' %}">Explore all products</a></div>
-    <div class="rail-wrap">{% include "partials/arrows.html" with rail="spaces" %}
-      <div class="rail" id="spaces">{% for a in spaces %}
-        <a class="space" href="{{ a.get_absolute_url }}"><div class="slot{% if a.photo %} has-photo{% endif %}">{% if a.photo %}{% image a.photo fill-600x750 format-webp class="photo" alt="" loading="lazy" %}{% else %}<div class="fb">{% if a.cutout %}{% image a.cutout max-500x500 format-webp alt="" loading="lazy" %}{% endif %}</div>{% endif %}</div><span>{{ a.name }}</span></a>
-      {% endfor %}</div>
+<section class="h-ways h-dark" aria-label="Start here">
+  <div class="h-wrap">
+    <a href="{% url 'catalogue:space' 'homes' %}"><b>Homes</b><span>Living rooms, kitchens, bedrooms</span></a>
+    <a href="#projects"><b>Commercial spaces</b><span>Offices, shops, restaurants</span></a>
+    <a href="{% url 'catalogue:outdoor' %}"><b>Outdoor</b><span>Facades, steps and gardens</span></a>
+  </div>
+</section>
+
+<section class="h-sec h-tone h-dark" id="tone" aria-labelledby="tone-h">
+  <div class="h-wrap">
+    <figure class="h-room h-shot h-rv" style="margin:0">
+      <picture class="h-view on" data-room="home" data-cap="This living room">
+        <source media="(max-width:700px)" srcset="{% static 'img/home/hero-m.webp' %}">
+        <img src="{% static 'img/home/hero.webp' %}" alt="A living room shown in the colour temperature you choose" loading="lazy" decoding="async">
+      </picture>
+      <picture class="h-view" data-room="work" data-cap="This office lobby">
+        <source media="(max-width:700px)" srcset="{% static 'img/home/hero2-m.webp' %}">
+        <img src="{% static 'img/home/hero2.webp' %}" alt="An office lobby shown in the colour temperature you choose" loading="lazy" decoding="async">
+      </picture>
+      <div class="h-tint" aria-hidden="true"></div>
+      <div class="h-lift" aria-hidden="true"></div>
+      <div class="h-grain" aria-hidden="true"></div>
+      <div class="h-rooms" role="group" aria-label="Choose a space">
+        <button type="button" data-room="home" aria-pressed="true">Home</button>
+        <button type="button" data-room="work" aria-pressed="false">Commercial</button>
+      </div>
+      <figcaption><span id="room-cap">This living room</span> at <span id="k-cap">3000K</span></figcaption>
+    </figure>
+    <div class="h-rv">
+      <span class="h-eyebrow">Colour temperature</span>
+      <h2 class="h-h2" id="tone-h" style="margin-top:14px">Warm, neutral or cool?</h2>
+      <p class="h-lede" style="margin-top:20px">The same fitting changes a room completely. Drag the slider to see the white you are choosing.</p>
+      <div class="h-readout"><output id="k-out" for="k">3000K</output><span id="k-name">Warm white</span></div>
+      <input type="range" id="k" min="2700" max="6500" step="100" value="3000" aria-label="Colour temperature in Kelvin">
+      <div class="h-presets" role="group" aria-label="Presets">
+        <button type="button" data-k="3000" aria-pressed="true">Warm 3000K</button>
+        <button type="button" data-k="4000" aria-pressed="false">Neutral 4000K</button>
+        <button type="button" data-k="6000" aria-pressed="false">Cool 6000K</button>
+      </div>
+      <p class="h-use" id="k-use">Best for living rooms, bedrooms and restaurants. Soft and relaxed.</p>
     </div>
   </div>
 </section>
 
-{% if feature_cards %}
-<section class="feature" aria-labelledby="feat-h">
-  <div class="feature-top">
-    <div class="feature-panel"><div><span class="eyebrow">{{ site.feature_eyebrow }}</span><h2 id="feat-h">{{ site.feature_title }}</h2>{% if site.feature_text %}<p>{{ site.feature_text }}</p>{% endif %}
-      {% if site.feature_link %}<a class="tlink" href="{{ site.feature_link.get_absolute_url }}">Discover {{ site.feature_link.name }}</a>{% else %}<a class="tlink" href="{% url 'catalogue:new' %}">Shop new in</a>{% endif %}</div></div>
-    <div class="feature-img slot{% if site.feature_image %} has-photo{% endif %}">{% if site.feature_image %}{% image site.feature_image fill-2000x1400 format-webp class="photo" alt="" loading="lazy" %}{% else %}<div class="fb collage">{% for c in feature_cards|slice:":3" %}{% if c.image %}{% image c.image max-700x700 format-webp alt="" %}{% endif %}{% endfor %}</div>{% endif %}</div>
+<section class="h-coll h-dark" aria-labelledby="cob-h">
+  <div class="h-coll-txt">
+      <span class="h-eyebrow">COB spots &amp; downlights</span>
+      <h2 id="cob-h">Compact power, honest colour.</h2>
+      <p>Recessed and surface COB spots from 2W to 18W, with anti-glare trims that keep the lamp itself out of sight.</p>
+      <a class="h-btn h-ghost" href="{{ link_cob }}">Explore COB spots</a>
+    </div>
+  <div class="h-coll-shot">
+    <picture>
+      <source media="(max-width:700px)" srcset="{% static 'img/home/coll-cob-m.webp' %}">
+      <img src="{% static 'img/home/coll-cob.webp' %}" alt="A black recessed COB downlight in a dark ceiling, throwing warm light down a wall" loading="lazy" decoding="async" style="object-position:70% 42%">
+    </picture>
   </div>
-  <div class="feature-row"><div class="rail-wrap">{% include "partials/arrows.html" with rail="feat" %}<div class="rail" id="feat">{% for c in feature_cards %}
-    <a class="card" href="{{ c.url }}"><div class="ph">{% if c.is_new %}<span class="new">NEW</span>{% endif %}{% if c.image %}{% image c.image max-600x600 format-webp alt="" loading="lazy" %}{% endif %}</div>
-      <span class="nm">{{ c.name }}</span>{% if c.finishes %}<span class="sw">{% for f in c.finishes %}<i style="background:{{ f.swatch }}" title="{{ f.name }}"></i>{% endfor %}</span>{% endif %}<span class="pr">{{ c.price }}</span></a>
-  {% endfor %}</div></div></div>
-</section>
-{% endif %}
-
-<section class="wrap sec" aria-labelledby="cat-h">
-  <div class="head"><h2 id="cat-h">Shop by category</h2><a class="tlink" href="{% url 'catalogue:all' %}">View all</a></div>
-  <div class="bento">{% for c in categories %}
-    <a class="{% if forloop.counter == 2 %}tall{% endif %}" href="{{ c.get_absolute_url }}"><div class="slot{% if c.photo %} has-photo{% endif %}">{% if c.photo %}{% image c.photo fill-1000x750 format-webp class="photo" alt="" loading="lazy" %}{% else %}<div class="fb">{% if c.cutout %}{% image c.cutout max-600x600 format-webp alt="" loading="lazy" %}{% endif %}</div>{% endif %}<div class="ov"></div></div><span class="lbl">{{ c.name }}</span><small>{{ c.range_count }} range{{ c.range_count|pluralize }}</small></a>
-  {% endfor %}</div>
+  <div class="h-coll-pick h-slot" data-need="Product photo"></div>
 </section>
 
-<section class="band" id="commercial" aria-labelledby="com-h">
-  <div class="wrap">
-    <div><span class="eyebrow" style="color:var(--sage)">Commercial &amp; trade</span><h2 id="com-h" style="margin-top:12px">{{ site.trade_title }}</h2><p>{{ site.trade_text }}</p><a class="tlink" href="{{ wa_trade }}">Send your BOQ on WhatsApp</a></div>
-    <div class="facts"><div><b>15+</b><span>years in lighting</span></div><div><b>3</b><span>global brands distributed</span></div><div><b>{{ range_total }}</b><span>product ranges in stock</span></div><div><b>PK</b><span>delivery across Pakistan</span></div></div>
+<section class="h-coll h-dark" aria-labelledby="blade-h">
+  <div class="h-coll-txt">
+      <span class="h-eyebrow">Laser blades &amp; linear</span>
+      <h2 id="blade-h">A thin line, and no glare.</h2>
+      <p>Recessed blades from one head to fifteen, CRI above 90, for ceilings that should look like nothing is there.</p>
+      <a class="h-btn h-ghost" href="{{ link_blade }}">Explore laser blades</a>
+    </div>
+  <div class="h-coll-shot h-slot" data-need="One recessed line across a ceiling"></div>
+  <div class="h-coll-pick h-slot" data-need="Product photo"></div>
+</section>
+
+<section class="h-coll h-dark" aria-labelledby="track-h">
+  <div class="h-coll-txt">
+      <span class="h-eyebrow">Track lights</span>
+      <h2 id="track-h">Point the light where it earns its keep.</h2>
+      <p>Spotlights on a one-metre rail, so a shop, gallery or showroom can move its light whenever the display changes.</p>
+      <a class="h-btn h-ghost" href="{{ link_track }}">Explore track lights</a>
+    </div>
+  <div class="h-coll-shot h-slot" data-need="Track spots aimed at a shop wall"></div>
+  <div class="h-coll-pick h-slot" data-need="Product photo"></div>
+</section>
+
+<section class="h-sec" id="spaces" aria-labelledby="spaces-h" style="padding-top:0">
+  <div class="h-wrap">
+    <div class="h-head h-rv"><div><span class="h-eyebrow">By space</span><h2 class="h-h2" id="spaces-h" style="margin-top:14px">Where is the light going?</h2></div></div>
+    <div class="h-spaces h-rv">
+      {% for a in spaces %}<a href="{{ a.get_absolute_url }}"><b>{{ a.name }}</b><span>{{ a.blurb }}</span><i></i></a>
+      {% endfor %}
+    </div>
   </div>
 </section>
 
-<section class="wrap sec" id="about" aria-labelledby="about-h">
-  <div class="about"><h2 id="about-h">{{ site.about_title }}</h2>{% if site.about_text %}<p>{{ site.about_text }}</p>{% endif %}</div>
-  {% if site.brand_list %}<div class="brands-row" style="margin-top:56px" aria-label="Brands">{% for b in site.brand_list %}<b>{{ b }}</b>{% endfor %}</div>{% endif %}
+<section class="h-sec h-trade h-dark" id="projects" aria-labelledby="proj-h">
+  <div class="h-wrap">
+    <div class="h-rv">
+      <span class="h-eyebrow">Lighting a whole space?</span>
+      <h2 class="h-h2" id="proj-h" style="margin-top:14px">Send us your plan and we'll light it.</h2>
+      <p class="h-lede">Tell us the rooms and what they are for. We work out how many lights you need, which ones and where they go, and you buy it all in one go.</p>
+      <a class="h-btn" href="{{ wa_project }}">Ask us on WhatsApp</a>
+    </div>
+    <div class="h-facts h-rv">
+      <div><b>15+</b><span>years in lighting</span></div>
+      <div><b>{{ range_total }}</b><span>product ranges</span></div>
+      <div><b>PK</b><span>delivery across Pakistan</span></div>
+    </div>
+  </div>
 </section>
 
-<section class="showroom" id="contact" aria-labelledby="show-h" style="margin-top:104px">
-  <div class="txt"><span class="eyebrow muted">Visit the showroom</span><h2 id="show-h">See the light before you buy it.</h2>
-    <address>{{ site.address|linebreaksbr }}</address>
-    <span class="fine">WhatsApp {{ site.whatsapp_display }} · {{ site.email }}</span>
-    <div class="row"><a class="tlink" href="https://wa.me/{{ site.whatsapp }}">WhatsApp us</a><a class="tlink" href="https://www.google.com/maps/search/?api=1&amp;query={{ site.maps_query|urlencode }}">Get directions</a></div></div>
-  <div class="slot{% if site.showroom_image %} has-photo{% endif %}">{% if site.showroom_image %}{% image site.showroom_image fill-1600x1100 format-webp class="photo" alt="Radiant Lighting showroom" loading="lazy" %}{% else %}<div class="fb"></div>{% endif %}</div>
+<section class="h-sec" id="showroom" aria-labelledby="show-h">
+  <div class="h-wrap h-show">
+    <div class="h-rv">
+      <span class="h-eyebrow">Visit the showroom</span>
+      <h2 class="h-h2" id="show-h" style="margin-top:14px">See the light before you buy it.</h2>
+      <address>{{ site.address|linebreaksbr }}</address>
+      <p class="h-fine">WhatsApp {{ site.whatsapp_display }} · {{ site.email }}</p>
+      <div class="h-row"><a class="h-tlink" href="https://wa.me/{{ site.whatsapp }}">WhatsApp us</a><a class="h-tlink" href="https://www.google.com/maps/search/?api=1&amp;query={{ site.maps_query|urlencode }}">Get directions</a></div>
+    </div>
+    {% if site.showroom_image %}<div class="h-showpic h-rv">{% image site.showroom_image fill-1600x1100 format-webp alt="Radiant Lighting showroom" loading="lazy" %}</div>{% else %}<div class="h-glow h-rv" aria-hidden="true"></div>{% endif %}
+  </div>
 </section>
+</div>
 {% endblock %}
+{% block scripts %}<script>
+"use strict";
+// Hero carousel: dots, swipe, and a slow auto-advance that stops once touched.
+const slides = [...document.querySelectorAll(".h-hero .h-slide")];
+const dots = [...document.querySelectorAll(".h-dots button")];
+const still = matchMedia("(prefers-reduced-motion: reduce)");
+let at = 0, timer = null;
+function show(n) {
+  at = (n + slides.length) % slides.length;
+  slides.forEach((el, i) => {
+    const on = i === at;
+    el.classList.toggle("on", on);
+    el.toggleAttribute("aria-hidden", !on);
+    el.querySelectorAll("a").forEach((a) => a.tabIndex = on ? 0 : -1);
+  });
+  dots.forEach((d, i) => d.setAttribute("aria-current", String(i === at)));
+}
+function play() { if (!still.matches) { stop(); timer = setInterval(() => show(at + 1), 7000); } }
+function stop() { clearInterval(timer); timer = null; }
+dots.forEach((d) => d.addEventListener("click", () => { show(Number(d.dataset.i)); stop(); }));
+const hero = document.querySelector(".h-hero");
+let x0 = null;
+hero.addEventListener("touchstart", (e) => { x0 = e.touches[0].clientX; }, { passive: true });
+hero.addEventListener("touchend", (e) => {
+  if (x0 === null) return;
+  const dx = e.changedTouches[0].clientX - x0;
+  if (Math.abs(dx) > 50) { show(at + (dx < 0 ? 1 : -1)); stop(); }
+  x0 = null;
+}, { passive: true });
+document.addEventListener("visibilitychange", () => document.hidden ? stop() : (timer && play()));
+play();
+
+// Colour temperature: Kelvin to the RGB of the light, interpolated between known points.
+const STOPS = [[2700, [255, 169, 87]], [3000, [255, 184, 112]], [4000, [255, 209, 163]], [5000, [255, 232, 212]], [6000, [248, 244, 255]], [6500, [232, 238, 255]]];
+function lampRgb(k) {
+  for (let i = 1; i < STOPS.length; i++) {
+    const [k0, a] = STOPS[i - 1], [k1, b] = STOPS[i];
+    if (k <= k1) { const t = (k - k0) / (k1 - k0); return a.map((v, j) => Math.round(v + (b[j] - v) * t)); }
+  }
+  return STOPS[STOPS.length - 1][1];
+}
+const BANDS = [
+  [3300, "Warm white", "Best for living rooms, bedrooms and restaurants. Soft and relaxed."],
+  [4500, "Neutral white", "Best for kitchens, offices and shops. Clean without feeling cold."],
+  [9999, "Cool white", "Best for workshops, car parks and task areas. Crisp and alert."],
+];
+const range = document.getElementById("k"), out = document.getElementById("k-out");
+const kName = document.getElementById("k-name"), kUse = document.getElementById("k-use");
+const kCap = document.getElementById("k-cap");
+const presets = [...document.querySelectorAll(".h-presets button")];
+function setK(k) {
+  k = Number(k);
+  range.value = k;
+  document.documentElement.style.setProperty("--lamp", lampRgb(k).join(" "));
+  out.textContent = k + "K";
+  kCap.textContent = k + "K";
+  const band = BANDS.find((b) => k <= b[0]);
+  kName.textContent = band[1];
+  kUse.textContent = band[2];
+  presets.forEach((b) => b.setAttribute("aria-pressed", String(Number(b.dataset.k) === k)));
+}
+range.addEventListener("input", () => setK(range.value));
+
+// Same light, different space.
+const views = [...document.querySelectorAll(".h-room .h-view")];
+const roomBtns = [...document.querySelectorAll(".h-rooms button")];
+const roomCap = document.getElementById("room-cap");
+roomBtns.forEach((b) => b.addEventListener("click", () => {
+  const want = b.dataset.room;
+  views.forEach((v) => v.classList.toggle("on", v.dataset.room === want));
+  roomBtns.forEach((o) => o.setAttribute("aria-pressed", String(o.dataset.room === want)));
+  roomCap.textContent = views.find((v) => v.dataset.room === want).dataset.cap;
+}));
+presets.forEach((b) => b.addEventListener("click", () => setK(b.dataset.k)));
+</script>{% endblock %}

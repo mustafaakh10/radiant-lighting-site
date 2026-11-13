@@ -28,7 +28,7 @@
     <nav class="nav" aria-label="Main">
       <button id="megaBtn" aria-expanded="false" aria-controls="mega"{% if nav == "products" %} aria-current="page"{% endif %}>Products</button>
       <a href="{% url 'catalogue:space' 'homes' %}"{% if nav == "residential" %} aria-current="page"{% endif %}>Residential</a>
-      <a href="{% url 'home' %}#commercial">Commercial</a>
+      <a href="{% url 'home' %}#projects">Commercial</a>
       <a href="{% url 'home' %}#about">About</a>
       <a href="{% url 'home' %}#contact">Contact</a>
     </nav>
@@ -62,7 +62,7 @@
   <h4>Products</h4>
   <nav aria-label="Product categories">{% for c in nav_categories %}<a href="{{ c.get_absolute_url }}">{{ c.name }}</a>{% endfor %}<a href="{% url 'catalogue:all' %}">All products</a></nav>
   <h4>Explore</h4>
-  <nav aria-label="Pages"><a href="{% url 'catalogue:space' 'homes' %}">Residential</a><a href="{% url 'home' %}#commercial">Commercial &amp; trade</a><a href="{% url 'home' %}#about">About</a><a href="{% url 'home' %}#contact">Showroom &amp; contact</a></nav>
+  <nav aria-label="Pages"><a href="{% url 'catalogue:space' 'homes' %}">Residential</a><a href="{% url 'home' %}#projects">Commercial</a><a href="{% url 'home' %}#about">About</a><a href="{% url 'home' %}#contact">Showroom &amp; contact</a></nav>
   <a class="btn primary" href="https://wa.me/{{ s.whatsapp }}">Chat on WhatsApp · {{ s.whatsapp_display }}</a>
 </div>
 
@@ -74,7 +74,7 @@
       <p>Architectural LED lighting for homes and commercial projects, from our showroom in Multan.</p></div>
     <div><h4>Products</h4><ul>{% for c in nav_categories %}<li><a href="{{ c.get_absolute_url }}">{{ c.name }}</a></li>{% endfor %}</ul></div>
     <div><h4>Spaces</h4><ul>{% for a in nav_spaces %}<li><a href="{{ a.get_absolute_url }}">{{ a.name }}</a></li>{% endfor %}</ul></div>
-    <div><h4>Contact</h4><ul><li><a href="https://wa.me/{{ s.whatsapp }}">WhatsApp {{ s.whatsapp_display }}</a></li><li>{{ s.email }}</li><li>{{ s.address|linebreaksbr }}</li><li><a href="{% url 'home' %}#commercial">Trade pricing</a></li></ul></div>
+    <div><h4>Contact</h4><ul><li><a href="https://wa.me/{{ s.whatsapp }}">WhatsApp {{ s.whatsapp_display }}</a></li><li>{{ s.email }}</li><li>{{ s.address|linebreaksbr }}</li><li><a href="{% url 'home' %}#projects">Lighting a project?</a></li></ul></div>
   </div>
   <div class="wrap fbase"><span>© {% now "Y" %} Radiant Lighting · Multan</span><span>Delivery across Pakistan</span></div>
 </footer>
