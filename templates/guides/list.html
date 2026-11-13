@@ -16,10 +16,9 @@
   </nav>{% endif %}
   {% if featured %}<a class="g-feat" href="{{ featured.get_absolute_url }}">
     <div class="ph">{% if featured.cover %}{% image featured.cover fill-1400x875 format-webp alt="" %}{% endif %}</div>
-    <div><span class="meta" style="font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--green-ink)">{{ featured.get_topic_display }} · {{ featured.read_minutes }} min read</span>
+    <div><span class="meta">{{ featured.get_topic_display }} · {{ featured.read_minutes }} min read</span>
       <h2>{{ featured.title }}</h2><p>{{ featured.summary }}</p><span class="g-more">Read the guide</span></div>
   </a>{% endif %}
   <div class="pgrid">{% for g in guides %}{% include "partials/guide_card.html" with h="3" %}{% empty %}{% if not featured %}<p class="empty">No guides here yet.</p>{% endif %}{% endfor %}</div>
 </section>
-{% include "partials/cta_band.html" with cta_title="Not sure what you need?" cta_text="Send the room sizes on WhatsApp. We'll suggest the fittings and a price." %}
 {% endblock %}

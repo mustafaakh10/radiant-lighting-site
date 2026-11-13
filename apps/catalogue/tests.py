@@ -81,7 +81,7 @@ class GuideTests(TestCase):
         g = Guide.objects.get(slug="how-many-downlights-per-room")
         html = self.client.get(g.get_absolute_url()).content.decode()
         self.assertIn('"@type": "Article"', html)
-        self.assertIn("Products in this guide", html)
+        self.assertIn("Products mentioned", html)
         self.assertIn("/guides/", self.client.get("/").content.decode())
         self.assertIn("/guides/how-many-downlights-per-room/", self.client.get("/sitemap.xml").content.decode())
         p = g.products.first()
