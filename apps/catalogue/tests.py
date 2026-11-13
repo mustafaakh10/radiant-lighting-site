@@ -46,3 +46,23 @@ class CatalogueTests(TestCase):
         Product.objects.filter(slug="linea").update(is_published=False)
         self.assertEqual(self.client.get("/products/downlights/linea/").status_code, 404)
         self.assertNotContains(self.client.get("/products/"), ">Linea<")
+
+
+class SeoTests(TestCase):
+    def test_robots_and_sitemap(self):
+        r = self.client.get("/robots.txt")
+        self.assertIn("Sitemap:", r.content.decode())
+        self.assertIn("Disallow: /admin/", r.content.decode())
+        with self.settings(SITE_NOINDEX=True):
+            self.assertIn("Disallow: /\n", self.client.get("/robots.txt").content.decode())
+        x = self.client.get("/sitemap.xml").content.decode()
+        for path in ("/about/", "/contact/", "/projects/", "/shop-the-room/"):
+            self.assertIn(path, x)
+
+    def test_canonical_drops_query_and_search_noindex(self):
+        html = self.client.get("/products/?location=indoor").content.decode()
+        self.assertIn('rel="canonical" href="http://testserver/products/"', html)
+        self.assertIn('property="og:image"', html)
+        self.assertIn("noindex", self.client.get("/search/?q=x").content.decode())
+        with self.settings(SITE_URL="https://radiantlighting.pk"):
+            self.assertIn('href="https://radiantlighting.pk/about/"', self.client.get("/about/").content.decode())

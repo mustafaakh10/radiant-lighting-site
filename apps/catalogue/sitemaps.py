@@ -8,7 +8,7 @@ class StaticSitemap(Sitemap):
     priority = 1.0
 
     def items(self):
-        return ["home", "catalogue:all"]
+        return ["home", "catalogue:all", "rooms", "projects:list", "about", "contact"]
 
     def location(self, item):
         return reverse(item)
@@ -38,4 +38,12 @@ class ProductSitemap(Sitemap):
         return obj.updated_at
 
 
-SITEMAPS = {"static": StaticSitemap, "categories": CategorySitemap, "spaces": SpaceSitemap, "products": ProductSitemap}
+class ProjectSitemap(Sitemap):
+    priority = 0.5
+
+    def items(self):
+        from apps.projects.models import Project
+        return Project.objects.filter(is_published=True)
+
+
+SITEMAPS = {"projects": ProjectSitemap, "static": StaticSitemap, "categories": CategorySitemap, "spaces": SpaceSitemap, "products": ProductSitemap}

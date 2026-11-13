@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% block robots %}<meta name="robots" content="noindex, follow">{% endblock %}
 {% block title %}Search{% if q %}: {{ q }}{% endif %} · Radiant Lighting{% endblock %}
 {% block head %}<meta name="robots" content="noindex">{% endblock %}
 {% block content %}

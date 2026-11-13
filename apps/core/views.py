@@ -1,5 +1,6 @@
 from urllib.parse import quote
 
+from django.conf import settings
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.urls import reverse
@@ -58,5 +59,9 @@ def home(request):
 
 
 def robots(request):
-    lines = ["User-agent: *", "Disallow: /admin/", "Disallow: /search/", f"Sitemap: {request.build_absolute_uri('/sitemap.xml')}"]
+    if settings.SITE_NOINDEX:
+        lines = ["User-agent: *", "Disallow: /"]
+    else:
+        base = settings.SITE_URL or f"{request.scheme}://{request.get_host()}"
+        lines = ["User-agent: *", "Disallow: /admin/", "Disallow: /search/", "Disallow: /_deploy/", f"Sitemap: {base}/sitemap.xml"]
     return HttpResponse("\n".join(lines) + "\n", content_type="text/plain")

@@ -2,7 +2,7 @@
 {% block body_class %}home{% endblock %}
 {% block og_title %}Radiant Lighting · Architectural LED lighting, Multan{% endblock %}
 {% block head %}<link rel="stylesheet" href="{% static 'css/home.css' %}">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Store","name":"Radiant Lighting","telephone":"+{{ site.whatsapp }}","email":"{{ site.email }}","address":{"@type":"PostalAddress","streetAddress":"{{ site.address|linebreaksbr|striptags|escapejs }}","addressLocality":"Multan","addressCountry":"PK"},"url":"{{ request.build_absolute_uri }}"}</script>{% endblock %}
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Store","name":"Radiant Lighting","telephone":"+{{ site.whatsapp }}","email":"{{ site.email }}","address":{"@type":"PostalAddress","streetAddress":"{{ site.address|linebreaksbr|striptags|escapejs }}","addressLocality":"Multan","addressCountry":"PK"},"url":"{{ site_url }}/","image":"{{ default_og_image }}"}</script>{% endblock %}
 {% block content %}
 <div class="hp">
 <section class="h-hero h-dark" aria-roledescription="carousel" aria-label="Featured">

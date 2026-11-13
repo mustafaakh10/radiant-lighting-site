@@ -74,6 +74,7 @@ TEMPLATES = [
                 "django.contrib.messages.context_processors.messages",
                 "wagtail.contrib.settings.context_processors.settings",
                 "apps.catalogue.context_processors.navigation",
+                "apps.core.context_processors.seo",
             ],
         },
     },
@@ -112,6 +113,7 @@ STATICFILES_DIRS = [BASE_DIR / "static"]
 MEDIA_URL = "/media/"
 MEDIA_ROOT = Path(env("DJANGO_MEDIA_ROOT", BASE_DIR / "media"))
 SERVE_MEDIA = env_bool("DJANGO_SERVE_MEDIA", False)
+SITE_URL = env("DJANGO_SITE_URL", "").rstrip("/")   # e.g. https://radiantlighting.pk, used for canonical and sitemap links
 SITE_NOINDEX = env_bool("DJANGO_SITE_NOINDEX", False)   # test copies: keep out of Google
 DEPLOY_TOKEN = env("DJANGO_DEPLOY_TOKEN", "")            # empty = deploy hook switched off
 STORAGES = {

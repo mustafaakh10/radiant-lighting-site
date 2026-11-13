@@ -5,11 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{% block title %}Radiant Lighting · Architectural LED lighting, Multan{% endblock %}</title>
 <meta name="description" content="{% block description %}Architectural LED lighting for homes and commercial projects in Multan and across Pakistan. Downlights, laser blades, track lights, strip lights and aluminium profiles.{% endblock %}">
-<link rel="canonical" href="{{ request.build_absolute_uri }}">
+<link rel="canonical" href="{{ canonical_url }}">
+{% block robots %}{% if noindex %}<meta name="robots" content="noindex, nofollow">{% endif %}{% endblock %}
+<meta name="theme-color" content="#1F3D2E">
 <meta property="og:site_name" content="Radiant Lighting">
+<meta property="og:locale" content="en_PK">
+<meta property="og:url" content="{{ canonical_url }}">
 <meta property="og:title" content="{% block og_title %}Radiant Lighting{% endblock %}">
 <meta property="og:type" content="{% block og_type %}website{% endblock %}">
-{% block og_image %}{% endblock %}
+{% block og_image %}<meta property="og:image" content="{{ default_og_image }}">{% endblock %}
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
